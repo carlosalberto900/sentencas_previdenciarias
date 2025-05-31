@@ -38,7 +38,7 @@ if 'processo_formatado' in locals():
                          "88 - Amparo assistencial ao deficiente ou ao idoso (LOAS)"                         
                          )
     if beneficio == 1:
-        exec(open("pensao_morte.py").read())
+        st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 2:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 3:
@@ -54,4 +54,4 @@ if 'processo_formatado' in locals():
     if beneficio == 8:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 9:
-        exec(open("loas.py").read()) 
+        exec(open("LOAS.py").read()) 
