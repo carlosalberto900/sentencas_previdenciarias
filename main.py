@@ -1,6 +1,13 @@
 import streamlit as st
 import time
 import subprocess
+
+def aviso_sentenca_nao_implementada():
+    texto = "Esta sentença ainda não foi implementada no sistema."
+    for char in texto:
+        yield char
+        time.sleep(0.02)  # ajuste o tempo se quiser mais rápido ou mais lento
+
 # Interface gráfica com Streamlit
 st.title("GERADOR DE SENTENÇAS EM BENEFÍCIOS PREVIDENCIÁRIOS")
 st.title("PARA JUIZADO ESPECIAL FEDERAL")
@@ -16,11 +23,7 @@ if processo:
         st.error("Formato inválido! O número do processo deve ter 20 dígitos numéricos, após remoção de caracteres especiais.")
 if 'processo_formatado' in locals():
     st.write(f"Processo: {processo_formatado}")
-    def aviso_sentenca_nao_implementada():
-        texto = "Esta sentença ainda não foi implementada no sistema."
-        for char in texto:
-            yield char
-            time.sleep(0.02)  # ajuste o tempo se quiser mais rápido ou mais lento
+
     beneficio = st.radio("Qual o benefício será analisado?",
                          [1, 2, 3, 4, 5, 6, 7, 8, 9],
                          format_func=lambda x:
@@ -37,6 +40,7 @@ if 'processo_formatado' in locals():
                          "87 - Amparo assistencial ao deficiente (LOAS)\n\n"
                          "88 - Amparo assistencial ao deficiente ou ao idoso (LOAS)"                         
                          )
+    
     if beneficio == 1:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 2:
