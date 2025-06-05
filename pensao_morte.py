@@ -620,7 +620,7 @@ if resultado == 1:
         pericia = st.text_area("O que a perícia médica constatou sobre invalidez, deficiência intelectual ou mental ou deficiência grave? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         pensao_prazo = "enquanto permanecer inválido, deficiente intelectual ou mental, ou deficiente grave"    
     if dependente_opcoes in [5, 6]:
-        ha_sentenca_alimentos = st.radio("A parte trouxe sentença que comprove a fixação de pensão alimentícia, ou fará prova de dependência econômica por testemunha?", [1, 2], format_func=lambda x: "Trouxe sentença" if x == 1 else "Ouvirá testemunhas", index=2)    
+        ha_sentenca_alimentos = st.radio("A parte trouxe sentença que comprove a fixação de pensão alimentícia, ou fará prova de dependência econômica por testemunha?", [1, 2], format_func=lambda x: "Trouxe sentença" if x == 1 else "Ouvirá testemunhas", index=1)    
         if ha_sentenca_alimentos == 1:
             alimentos = st.radio("O prazo de duração da pensão por morte é o mesmo da pensão alimentícia. No caso, a parte trouxe sentença de comprove fixação de pensão alimentícia temporária?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
             if alimentos == 1:
