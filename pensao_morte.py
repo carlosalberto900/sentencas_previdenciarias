@@ -619,7 +619,25 @@ if resultado == 1:
     if dependente_opcoes in [4, 9, 10, 15]:
         pericia = st.text_area("O que a perícia médica constatou sobre invalidez, deficiência intelectual ou mental ou deficiência grave? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         pensao_prazo = "enquanto permanecer inválido, deficiente intelectual ou mental, ou deficiente grave"    
-    if dependente_opcoes in [2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+    if dependente_opcoes in [5, 6]:
+        ha_sentenca_alimentos = st.radio("A parte trouxe sentença que comprove a fixação de pensão alimentícia, ou fará prova de dependência econômica por testemunha?", [1, 2], format_func=lambda x: "Trouxe sentença" if x == 1 else "Ouvirá testemunhas", index=2)    
+        if ha_sentenca_alimentos == 1:
+            alimentos = st.radio("O prazo de duração da pensão por morte é o mesmo da pensão alimentícia. No caso, a parte trouxe sentença de comprove fixação de pensão alimentícia temporária?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
+            if alimentos == 1:
+                prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
+                pensao_prazo = (f"enquanto durar a pensão alimentícia temporária (fixada até {prazo_alimentos})")
+            if alimentos == 2:
+                pensao_prazo = "de forma vitalícia"
+        if ha_sentenca_alimentos == 2:
+            lei13846 = date(2019, 6, 18)
+            if data_do_obito_convertida < lei13846:
+                inicio_prova_material_dependente = "O óbito ocorreu antes da vigência da Lei n. 13.846/2019, não havendo previsão legal para necessidade de apresentação de início de prova material"
+            if lei13846 <= data_do_obito_convertida:
+                inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+            st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+            testemunhas()
+            conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+    if dependente_opcoes in [2, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
         lei13846 = date(2019, 6, 18)
         if data_do_obito_convertida < lei13846:
             inicio_prova_material_dependente = "O óbito ocorreu antes da vigência da Lei n. 13.846/2019, não havendo previsão legal para necessidade de apresentação de início de prova material"
@@ -629,7 +647,7 @@ if resultado == 1:
         testemunhas()
         if dependente_opcoes == 2:
             conclusao = st.text_area("Os depoimentos comprovam a união estável, mas é preciso esclarecer desde quando, e, especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-        if dependente_opcoes in [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+        if dependente_opcoes in [7, 8, 9, 10, 11, 12, 13, 14, 15]:
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
     if dependente_opcoes in [1, 2, 5, 6]:
         data_vigencia = date(2016, 1, 3) #vigencia da Lei 13.146
@@ -670,17 +688,13 @@ if resultado == 1:
                     tempo = "por 20 anos"
                 if idade_autor >= 45:
                     tempo = "de forma vitalícia"
-            dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1)
-            if dependente_incapaz == 1:
-                pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-                pensao_prazo = (f"{tempo}"+", no mínimo, ou enquanto durar a invalidez/deficiência da parte autora")
-            if dependente_incapaz == 2:
-                pensao_prazo = tempo
-            if dependente_opcoes in [5, 6]:
-                alimentos = st.radio("No caso de ex-cônjuge que recebe pensão alimentícia temporária, o prazo de duração da pensão por morte é o mesmo da pensão alimentícia. No caso, a hipótese é de pensão alimentícia temporária?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
-                if alimentos == 1:
-                    prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
-                    pensao_prazo = (f"enquanto durar a pensão alimentícia temporária (fixada até {prazo_alimentos})")
+            if not tempo == "de forma vitalícia":        
+                dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1)
+                if dependente_incapaz == 1:
+                    pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+                    pensao_prazo = (f"{tempo}"+", no mínimo, ou enquanto durar a invalidez/deficiência da parte autora")
+                if dependente_incapaz == 2:
+                    pensao_prazo = tempo
     dib = st.text_input("DIB (dd/mm/aaaa):")
     motivo_DIB = st.radio("DIB fixada na DER?", [1,2,3],
                     format_func = lambda x: "DIB na DER" if x == 1 else "DIB no óbito" if x == 2 else "DIB fixada em outra data (necessário esclarecer)")
