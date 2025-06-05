@@ -42,7 +42,7 @@ if 'processo_formatado' in locals():
                          )
     
     if beneficio == 1:
-        st.write_stream(aviso_sentenca_nao_implementada)
+        exec(open("pensao_morte.py").read())
     if beneficio == 2:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 3:
