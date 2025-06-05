@@ -1,1 +1,1 @@
-# sentencas_previdenciarias
+Aplicativo desenvolvido para facilitar e padronizar a redação de sentenças em docx, baixadas para o computador do usuário, para processos do Juizado Especial Federal envolvendo matéria previdenciária.
