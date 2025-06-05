@@ -60,10 +60,10 @@ def improcedencia(doc):
                     (f"Em caso de interposição de embargos de declaração, intime-se a parte contrária para contrarrazões no prazo legal, e tornem conclusos para julgamento."),
                     (f"Interposto recurso, intime-se a parte contrária para contrarrazões no prazo legal. Após, remetam-se os autos às Turmas Recursais."),
                     (f"Com o trânsito em julgado, arquivem-se oportunamente."),
-                    (f"Int."),
+                    (f"Int.")
                     ]
-    for linha in improcedencia.split("\n"):
-        if linha.split():
+    for linha in improcedencia:
+        if linha.strip():
             parag = doc.add_paragraph(linha.strip())
             parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
             parag.paragraph_format.first_line_indent = Cm(2)
