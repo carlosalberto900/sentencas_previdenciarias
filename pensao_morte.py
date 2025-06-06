@@ -85,6 +85,44 @@ def testemunhas():
             break
         id_contador += 1
 
+def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
+    data_vigencia = date(2016, 1, 3) #vigencia da Lei 13.146
+    data_atualizacao = date(2021, 1, 1) #vigencia da portaria que aumentou um ano
+    if data_do_obito_convertida < data_vigencia:
+        tempo = "de forma vitalícia"
+    if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
+        idade_autor = int(st.number_input("Qual a idade da parte autora na data do óbito? (Digite apenas números):", min_value=0, max_value=150, step=1, key="idade_autor_pensao"))
+        carencia_instituidor = st.radio("O instituidor tem quantas contribuições vertidas em vida?", [1,2], format_func=lambda x: "menos de 18 contribuições" if x == 1 else "18 contribuições ou mais", index=1, key="carencia_instituidor_pensao")
+        tempo_casamento_uniao = st.radio("Qual o tempo do casamento/união estável da parte autora?", [1,2], format_func=lambda x: "menos de 02 anos" if x == 1 else "02 anos ou mais", index=1, key="tempo_casamento_uniao_pensao")
+        if carencia_instituidor == 1 or tempo_casamento_uniao == 1:
+            tempo = "por 4 meses"
+        if carencia_instituidor == 2 and tempo_casamento_uniao == 2 and data_vigencia <= data_do_obito_convertida < data_atualizacao:
+            if idade_autor < 21:
+                tempo = "por 3 anos"
+            if 21 <= idade_autor <= 26:
+                tempo = "por 6 anos"
+            if 27 <= idade_autor <= 29:
+                tempo = "por 10 anos"
+            if 30 <= idade_autor <= 40:
+                tempo = "por 15 anos"
+            if 41 <= idade_autor <= 43:
+                tempo = "por 20 anos"
+            if idade_autor >= 44:
+                tempo = "de forma vitalícia"
+        if carencia_instituidor == 2 and tempo_casamento_uniao == 2 and data_atualizacao <= data_do_obito_convertida:
+            if idade_autor < 22:
+                tempo = "por 3 anos"
+            if 22 <= idade_autor <= 27:
+                tempo = "por 6 anos"
+            if 28 <= idade_autor <= 30:
+                tempo = "por 10 anos"
+            if 31 <= idade_autor <= 41:
+                tempo = "por 15 anos"
+            if 42 <= idade_autor <= 44:
+                tempo = "por 20 anos"
+            if idade_autor >= 45:
+                tempo = "de forma vitalícia"
+
 fundamento_questao = st.radio(
 "**Relatório e fundamentação jurídica**\n\n"
 "Toda sentença gerada possui dispensa de relatório e uma fundamentação jurídica básica, que vai até onde se inicia a análise do caso concreto.\n\n"  
@@ -292,7 +330,7 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)                   
         #TESTEMUNHAS OUVIDAS EM JUÍZO NÃO COMPROVAM QUE O FALECIDO ERA SEGURADO
         if hipotese == 3:
-            testemunhas()
+            depoimentos = testemunhas()
             conclusao = st.text_area("Redija a conclusão explicando o motivo da prova testemunhal não comprovar que o falecido era segurado. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ") 
             if st.button("Gerar Sentença"):
                 doc = Document()
@@ -314,7 +352,7 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)               
         #NÃO RECONHECIMENTO DE QUALIDADE DE SEGURADO POST MORTEM
         if hipotese == 4:
-            testemunhas()
+            depoimentos = testemunhas()
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -620,14 +658,23 @@ if resultado == 1:
         pericia = st.text_area("O que a perícia médica constatou sobre invalidez, deficiência intelectual ou mental ou deficiência grave? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         pensao_prazo = "enquanto permanecer inválido, deficiente intelectual ou mental, ou deficiente grave"    
     if dependente_opcoes in [5, 6]:
-        ha_sentenca_alimentos = st.radio("A parte trouxe sentença que comprove a fixação de pensão alimentícia, ou fará prova de dependência econômica por testemunha?", [1, 2], format_func=lambda x: "Trouxe sentença" if x == 1 else "Ouvirá testemunhas", index=1)    
+        ha_sentenca_alimentos = st.radio("A parte trouxe sentença que comprove a fixação de pensão alimentícia, ou fará prova de dependência econômica por testemunha?", [1, 2], format_func=lambda x: "Trouxe sentença" if x == 1 else "Ouvirá testemunhas")    
         if ha_sentenca_alimentos == 1:
-            alimentos = st.radio("O prazo de duração da pensão por morte é o mesmo da pensão alimentícia. No caso, a parte trouxe sentença de comprove fixação de pensão alimentícia temporária?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
+            alimentos = st.radio("No caso, a parte trouxe sentença de comprove fixação de pensão alimentícia temporária, ou não há prazo final fixado para a pensão alimentícia?", [1, 2], format_func=lambda x: "Temporária" if x == 1 else "Sem prazo")
             if alimentos == 1:
                 prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
-                pensao_prazo = (f"enquanto durar a pensão alimentícia temporária (fixada até {prazo_alimentos})")
+                tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+                if not tempo == "de forma vitalícia":        
+                    dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                    if dependente_incapaz == 1:
+                        pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+                        pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
+                    if dependente_incapaz == 2:
+                        pensao_prazo = tempo
+                    if tempo == "de forma vitalícia":
+                        pensao_prazo = "de forma vitalícia"    
             if alimentos == 2:
-                pensao_prazo = "de forma vitalícia"
+                tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
         if ha_sentenca_alimentos == 2:
             lei13846 = date(2019, 6, 18)
             if data_do_obito_convertida < lei13846:
@@ -635,8 +682,18 @@ if resultado == 1:
             if lei13846 <= data_do_obito_convertida:
                 inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-            testemunhas()
+            depoimentos = testemunhas()
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+            tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+            if not tempo == "de forma vitalícia":        
+                dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                if dependente_incapaz == 1:
+                    pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+                    pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
+                if dependente_incapaz == 2:
+                    pensao_prazo = tempo
+                if tempo == "de forma vitalícia":
+                    pensao_prazo = "de forma vitalícia"                
     if dependente_opcoes in [2, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
         lei13846 = date(2019, 6, 18)
         if data_do_obito_convertida < lei13846:
@@ -644,57 +701,22 @@ if resultado == 1:
         if lei13846 <= data_do_obito_convertida:
             inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-        testemunhas()
+        depoimentos = testemunhas()
         if dependente_opcoes == 2:
             conclusao = st.text_area("Os depoimentos comprovam a união estável, mas é preciso esclarecer desde quando, e, especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         if dependente_opcoes in [7, 8, 9, 10, 11, 12, 13, 14, 15]:
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-    if dependente_opcoes in [1, 2, 5, 6]:
-        data_vigencia = date(2016, 1, 3) #vigencia da Lei 13.146
-        data_atualizacao = date(2021, 1, 1) #vigencia da portaria que aumentou um ano
-        if data_do_obito_convertida < data_vigencia:
-            tempo = None
-            pensao_prazo = "de forma vitalícia"
-        if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
-            idade_autor = int(st.number_input("Qual a idade da parte autora na data do óbito? (Digite apenas números):", min_value=0, max_value=150, step=1))
-            carencia_instituidor = st.radio("O instituidor tem quantas contribuições vertidas em vida?", [1,2], format_func=lambda x: "menos de 18 contribuições" if x == 1 else "18 contribuições ou mais", index=1)
-            tempo_casamento_uniao = st.radio("Qual o tempo do casamento/união estável da parte autora?", [1,2], format_func=lambda x: "menos de 02 anos" if x == 1 else "02 anos ou mais", index=1)
-            if carencia_instituidor == 1 or tempo_casamento_uniao == 1:
-                tempo = None
-                pensao_prazo = "por 4 meses"
-            if carencia_instituidor == 2 and tempo_casamento_uniao == 2 and data_vigencia <= data_do_obito_convertida < data_atualizacao:
-                if idade_autor < 21:
-                    tempo = "por 3 anos"
-                if 21 <= idade_autor <= 26:
-                    tempo = "por 6 anos"
-                if 27 <= idade_autor <= 29:
-                    tempo = "por 10 anos"
-                if 30 <= idade_autor <= 40:
-                    tempo = "por 15 anos"
-                if 41 <= idade_autor <= 43:
-                    tempo = "por 20 anos"
-                if idade_autor >= 44:
-                    tempo = "de forma vitalícia"
-            if carencia_instituidor == 2 and tempo_casamento_uniao == 2 and data_atualizacao <= data_do_obito_convertida:
-                if idade_autor < 22:
-                    tempo = "por 3 anos"
-                if 22 <= idade_autor <= 27:
-                    tempo = "por 6 anos"
-                if 28 <= idade_autor <= 30:
-                    tempo = "por 10 anos"
-                if 31 <= idade_autor <= 41:
-                    tempo = "por 15 anos"
-                if 42 <= idade_autor <= 44:
-                    tempo = "por 20 anos"
-                if idade_autor >= 45:
-                    tempo = "de forma vitalícia"
-            if not tempo == "de forma vitalícia":        
-                dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1)
-                if dependente_incapaz == 1:
-                    pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-                    pensao_prazo = (f"{tempo}"+", no mínimo, ou enquanto durar a invalidez/deficiência da parte autora")
-                if dependente_incapaz == 2:
-                    pensao_prazo = tempo
+    if dependente_opcoes in [1, 2]:
+        tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+        if not tempo == "de forma vitalícia":        
+            dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+            if dependente_incapaz == 1:
+                pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+                pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
+            if dependente_incapaz == 2:
+                pensao_prazo = tempo
+            if tempo == "de forma vitalícia":
+                pensao_prazo = "de forma vitalícia"                
     dib = st.text_input("DIB (dd/mm/aaaa):")
     motivo_DIB = st.radio("DIB fixada na DER?", [1,2,3],
                     format_func = lambda x: "DIB na DER" if x == 1 else "DIB no óbito" if x == 2 else "DIB fixada em outra data (necessário esclarecer)")
@@ -788,6 +810,5 @@ if resultado == 1:
             (f"Int.")
             ]) 
         ft.alinhamento_parag_dispositivo(doc, fundamento_procedencia)
-        ft.salvar_docx_temporario(doc, processo_formatado)              
-
+        ft.salvar_docx_temporario(doc, processo_formatado)   
 
