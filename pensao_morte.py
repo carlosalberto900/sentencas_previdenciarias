@@ -68,23 +68,6 @@ def improcedencia(doc):
             parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
             parag.paragraph_format.first_line_indent = Cm(2)
 
-def testemunhas():
-    depoimentos = []
-    id_contador = 1    
-    while id_contador <= 3:
-        st.write(f"Testemunha #{id_contador}:")
-        transcricao = st.text_area("Redija o depoimento, ou seu resumo", key=f"depoimento_qs_{id_contador}")
-        entrada = {
-            "testemunha": f"Testemunha {id_contador}",
-            "depoimento": transcricao
-        }
-        depoimentos.append(entrada)
-        if id_contador < 3:
-            continuar = st.radio("Deseja inserir outro depoimento?", [1,2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"continuar_depoimento_qs_{id_contador}", index=1)
-        if continuar == 2:
-            break
-        id_contador += 1
-
 def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
     data_vigencia = date(2016, 1, 3) #vigencia da Lei 13.146
     data_atualizacao = date(2021, 1, 1) #vigencia da portaria que aumentou um ano
@@ -330,7 +313,7 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)                   
         #TESTEMUNHAS OUVIDAS EM JUÍZO NÃO COMPROVAM QUE O FALECIDO ERA SEGURADO
         if hipotese == 3:
-            depoimentos = testemunhas()
+            depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             conclusao = st.text_area("Redija a conclusão explicando o motivo da prova testemunhal não comprovar que o falecido era segurado. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ") 
             if st.button("Gerar Sentença"):
                 doc = Document()
@@ -352,7 +335,7 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)               
         #NÃO RECONHECIMENTO DE QUALIDADE DE SEGURADO POST MORTEM
         if hipotese == 4:
-            depoimentos = testemunhas()
+            depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -447,7 +430,7 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)  
         #A PROVA TESTEMUNHAL NÃO COMPROVA UNIÃO ESTÁVEL
         if hipotese == 2:
-            testemunhas = st.text_area("O que as testemunhas disseram, e por que não comprovam a união estável? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+            testemunhas = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -465,7 +448,7 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)               
         # CONCUBINATO
         if hipotese == 3:
-            testemunhas = st.text_area("O que as testemunhas disseram, e por que existe concubinato e não união estável? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+            testemunhas = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -541,7 +524,7 @@ if resultado == 2:
         #A PROVA TESTEMUNHAL NÃO COMPROVA DEPENDÊNCIA ECONÔMICA
         if hipotese == 5:
             dependente_economico()
-            testemunhas = st.text_area("O que as testemunhas disseram, e porque não comprovam a dependência econômica? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+            testemunhas = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -578,21 +561,7 @@ if resultado == 1:
     caso_exige_prova_material_qs_instituidor = st.radio("A qualidade de segurado do instituidor depende da comprovação em Juízo de tempo de serviço, que exija início de prova material nos termos do art. 55, § 3º da Lei n. 8.213/91?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1)
     if caso_exige_prova_material_qs_instituidor == 1:
         prova_material_qs_instituidor = st.text_area("O que a parte autora apresentou como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):", key="prova_material_qs_instituidor")
-        depoimentos_qs_instituidor = []
-        id_contador = 1    
-        while id_contador <= 3:
-            st.write(f"Testemunha #{id_contador}:")
-            transcricao = st.text_area("Redija o depoimento, ou seu resumo", key=f"depoimento_qs_{id_contador}")
-            entrada = {
-                "testemunha": f"Testemunha {id_contador}",
-                "depoimento": transcricao
-            }
-            depoimentos_qs_instituidor.append(entrada)
-            if id_contador < 3:
-                continuar = st.radio("Deseja inserir outro depoimento?", [1,2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"continuar_depoimento_qs_{id_contador}", index=1)
-            if continuar == 2:
-                break
-            id_contador += 1
+        depoimentos_qs_instituidor = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
         qualidade_segurado = st.text_area("Os depoimentos comprovam a qualidade de segurado do instituidor, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
     else:
         qualidade_segurado = st.text_area("Por que o segurado instituidor mantinha a qualidade de segurado no óbito? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
@@ -682,7 +651,7 @@ if resultado == 1:
             if lei13846 <= data_do_obito_convertida:
                 inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-            depoimentos = testemunhas()
+            depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
             if not tempo == "de forma vitalícia":        
@@ -701,7 +670,7 @@ if resultado == 1:
         if lei13846 <= data_do_obito_convertida:
             inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-        depoimentos = testemunhas()
+        depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
         if dependente_opcoes == 2:
             conclusao = st.text_area("Os depoimentos comprovam a união estável, mas é preciso esclarecer desde quando, e, especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         if dependente_opcoes in [7, 8, 9, 10, 11, 12, 13, 14, 15]:
@@ -751,11 +720,9 @@ if resultado == 1:
                 if linha.split():
                     fundamento_procedencia.append(linha)
             fundamento_procedencia.append([(f"Foram ouvidas as seguintes testemunhas:")])
-            for entrada in depoimentos_qs_instituidor.split("\n"):
-                if entrada.split():
-                    testemunha = entrada["testemunha"]
-                    depoimento = entrada["depoimento"]
-                    fundamento_procedencia.append(f"{testemunha}: {depoimento}")
+            for linha in depoimentos_qs_instituidor.split("\n"):
+                if linha.split():
+                    fundamento_procedencia.append(linha)
             fundamento_procedencia.append([(f"{qualidade_segurado}")])           
         fundamento_procedencia.append([(f"Quanto à condição de dependente, a parte autora comprova ser {dependente} do(a) instituidor(a).")])
         if dependente == 1:
@@ -776,11 +743,9 @@ if resultado == 1:
                     if linha.split():
                         fundamento_procedencia.append(linha)
             fundamento_procedencia.append([(f"Foram ouvidas as seguintes testemunhas:")])
-            for entrada in depoimentos.split("\n"):
-                if entrada.split():
-                    testemunha = entrada["testemunha"]
-                    depoimento = entrada["depoimento"]
-                    fundamento_procedencia.append(f"{testemunha}: {depoimento}")
+            for linha in depoimentos.split("\n"):
+                if linha.split():
+                    fundamento_procedencia.append(linha)
             fundamento_procedencia.append([(f"{conclusao}")])
             if dependente_incapaz == 1:
                 fundamento_procedencia.append([(f"Foi realizada perícia médica que comprova a condição de inválido, deficiente intelectual ou mental, ou deficiente grave, conforme o disposto no artigo 16, § 2º, da Lei n. 8.213/91.")])
@@ -810,5 +775,4 @@ if resultado == 1:
             (f"Int.")
             ]) 
         ft.alinhamento_parag_dispositivo(doc, fundamento_procedencia)
-        ft.salvar_docx_temporario(doc, processo_formatado)   
-
+        ft.salvar_docx_temporario(doc, processo_formatado)              
