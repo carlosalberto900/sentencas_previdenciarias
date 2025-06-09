@@ -764,7 +764,7 @@ if resultado == 1:
                         fundamento_procedencia.append(linha)
         if dependente_opcoes == 1 and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
-        if dependente_opcoes == 1 and data_do_obito_convertido => date(2015, 1, 3):
+        if dependente_opcoes == 1 and data_do_obito_convertido >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
         if dependente_opcoes == 2 and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
