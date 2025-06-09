@@ -651,7 +651,7 @@ if resultado == 1:
                 if tempo == "de forma vitalícia":
                     pensao_prazo = "de forma vitalícia"    
             if alimentos == 2:
-                tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+                tempo_casamento_uniao, carencia_instituidor, tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
         if ha_sentenca_alimentos == 2:
             lei13846 = date(2019, 6, 18)
             if data_do_obito_convertida < lei13846:
