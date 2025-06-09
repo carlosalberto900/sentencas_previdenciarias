@@ -116,7 +116,7 @@ def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
                 tempo = "por 20 anos"
             if idade_autor >= 45:
                 tempo = "de forma vitalícia"
-return tempo_casamento_uniao, carencia_instituidor, tempo
+    return tempo_casamento_uniao, carencia_instituidor, tempo
 
 fundamento_questao = st.radio(
 "**Relatório e fundamentação jurídica**\n\n"
