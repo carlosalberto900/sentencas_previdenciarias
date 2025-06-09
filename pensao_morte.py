@@ -706,7 +706,7 @@ if resultado == 1:
         doc.add_paragraph(f"Processo: {processo_formatado}")
         texto_base(doc, fundamento_questao)
         fundamento_procedencia = [
-            (f"A parte autora comprova a qualidade de segurado do(a) instituidor(a), Sr(a). {instituidor}, ao tempo do óbito em {data_do_obito_convertida}, conforme o disposto no artigo 15, inciso I, da Lei n. 8.213/91."),
+            (f"A parte autora comprova a qualidade de segurado do(a) instituidor(a), Sr(a). {instituidor}, ao tempo do óbito em {data_do_obito}, conforme o disposto no artigo 15, inciso I, da Lei n. 8.213/91."),
             ]
         if caso_exige_prova_material_qs_instituidor == 2:
             for linha in qualidade_segurado.split("\n"):
@@ -723,18 +723,18 @@ if resultado == 1:
                     fundamento_procedencia.append(linha)
             fundamento_procedencia.append([(f"{qualidade_segurado}")])           
         fundamento_procedencia.append([(f"Quanto à condição de dependente, a parte autora comprova ser {dependente} do(a) instituidor(a).")])
-        if dependente == 1:
+        if dependente_opcoes == 1:
             fundamento_procedencia.append(f"Foi apresentado certidão casamento, realizado em {data_casamento}.")
-        if dependente == 3:
+        if dependente_opceos == 3:
             fundamento_procedencia.append(f"Foi apresentado certidão de nascimento / documento de identificação civil, que comprova a filiação, com nascimento em {data_nascimento}.")
-        if dependente == 4:
+        if dependente_opcoes == 4:
             fundamento_procedencia.append(f"Foi realizada perícia médica que comprova a condição de inválido, deficiente intelectual ou mental, ou deficiente grave, da parte autora.")
             for linha in pericia.split("\n"):
                 if linha.split():
                     fundamento_procedencia.append(linha)
-        if dependente in [2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+        if dependente_opcoes in [2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
             if data_do_obito_convertida < lei13846:
-                fundamento_procedencia.append(inicio_prova_material_dependente)
+                fundamento_procedencia.append(f"inicio_prova_material_dependente")
             if lei13846 <= data_do_obito_convertida:
                 fundamento_procedencia.append([(f"Foi apresentado início de prova material, que comprova a condição de dependente da parte autora, conforme o disposto no artigo 16, § 5º, da Lei n. 8.213/91.")])  
                 for linha in inicio_prova_material_dependente.split("\n"):
@@ -750,11 +750,11 @@ if resultado == 1:
                 for linha in pericia.split("\n"):
                     if linha.split():
                         fundamento_procedencia.append(linha)
-        if dependente == 1:
+        if dependente_opcoes == 1:
             fundamento_procedencia.append([(f"Considerando que a parte autora é cônjuge por {tempo_casamento_uniao} (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")])
-        if dependente == 2:
+        if dependente_opcoes == 2:
             fundamento_procedencia.append([(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}")])
-        if dependente in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+        if dependente_opcoes in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
             fundamento_procedencia.append([(f"Assim, a parte autora faz jus ao benefício pleiteado de pensão por morte {pensao_prazo}.")])
         fundamento_procedencia.extend([
             (f"A DIB será fixada em {dib}. {motivo_DIB_redigido}"),
