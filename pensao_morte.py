@@ -69,8 +69,11 @@ def improcedencia(doc):
             parag.paragraph_format.first_line_indent = Cm(2)
 
 def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
-    data_vigencia = date(2016, 1, 3) #vigencia da Lei 13.146
+    data_vigencia = date(2015, 1, 3) #vigencia da Lei 13.146
     data_atualizacao = date(2021, 1, 1) #vigencia da portaria que aumentou um ano
+tempo_casamento_uniao = ""
+carencia_instituidor = ""
+tempo = ""    
     if data_do_obito_convertida < data_vigencia:
         tempo = "de forma vitalícia"
     if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
@@ -758,8 +761,12 @@ if resultado == 1:
                 for linha in pericia.split("\n"):
                     if linha.split():
                         fundamento_procedencia.append(linha)
-        if dependente_opcoes == 1:
-            fundamento_procedencia.append(f"Considerando que a parte autora é cônjuge por {tempo_casamento_uniao} (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
+        if dependente_opcoes == 1 and data_do_obito_convertida < date(2015, 1, 3):
+            fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
+        if dependente_opcoes == 1 and data_do_obito_convertido => date(2015, 1, 3):
+            fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
+        if dependente_opcoes == 2 and data_do_obito_convertida < date(2015, 1, 3):
+            fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
         if dependente_opcoes == 2:
             fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
         if dependente_opcoes in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
