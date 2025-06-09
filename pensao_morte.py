@@ -650,7 +650,6 @@ if resultado == 1:
                 inicio_prova_material_dependente = "O óbito ocorreu antes da vigência da Lei n. 13.846/2019, não havendo previsão legal para necessidade de apresentação de início de prova material"
             if lei13846 <= data_do_obito_convertida:
                 inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-            st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
@@ -669,7 +668,6 @@ if resultado == 1:
             inicio_prova_material_dependente = "O óbito ocorreu antes da vigência da Lei n. 13.846/2019, não havendo previsão legal para necessidade de apresentação de início de prova material"
         if lei13846 <= data_do_obito_convertida:
             inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-        st.write("O que as testemunhas disseram sobre a condição de dependente da parte autora (dependência econômica ou condição de companheiro(a))? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
         if dependente_opcoes == 2:
             conclusao = st.text_area("Os depoimentos comprovam a união estável, mas é preciso esclarecer desde quando, e, especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
