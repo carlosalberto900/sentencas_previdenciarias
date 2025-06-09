@@ -71,9 +71,9 @@ def improcedencia(doc):
 def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
     data_vigencia = date(2015, 1, 3) #vigencia da Lei 13.146
     data_atualizacao = date(2021, 1, 1) #vigencia da portaria que aumentou um ano
-tempo_casamento_uniao = ""
-carencia_instituidor = ""
-tempo = ""    
+    tempo_casamento_uniao = ""
+    carencia_instituidor = ""
+    tempo = ""    
     if data_do_obito_convertida < data_vigencia:
         tempo = "de forma vitalícia"
     if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
