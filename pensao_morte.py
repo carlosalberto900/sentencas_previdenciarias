@@ -75,11 +75,19 @@ def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
         tempo = "de forma vitalícia"
     if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
         idade_autor = int(st.number_input("Qual a idade da parte autora na data do óbito? (Digite apenas números):", min_value=0, max_value=150, step=1, key="idade_autor_pensao"))
-        carencia_instituidor = st.radio("O instituidor tem quantas contribuições vertidas em vida?", [1,2], format_func=lambda x: "menos de 18 contribuições" if x == 1 else "18 contribuições ou mais", index=1, key="carencia_instituidor_pensao")
-        tempo_casamento_uniao = st.radio("Qual o tempo do casamento/união estável da parte autora?", [1,2], format_func=lambda x: "menos de 02 anos" if x == 1 else "02 anos ou mais", index=1, key="tempo_casamento_uniao_pensao")
-        if carencia_instituidor == 1 or tempo_casamento_uniao == 1:
+        carencia_instituidor_opcoes = st.radio("O instituidor tem quantas contribuições vertidas em vida?", [1,2], format_func=lambda x: "menos de 18 contribuições" if x == 1 else "18 contribuições ou mais", index=1, key="carencia_instituidor_pensao")
+        if carencia_instituidor_opcoes == 1:
+            carencia_instituidor = (f"menos de 18 contribuições")
+        else:
+            carencia_instituidor = (f"18 (dezoito) contribuições, ou mais,")
+        tempo_casamento_uniao_opcoes = st.radio("Qual o tempo do casamento/união estável da parte autora?", [1,2], format_func=lambda x: "menos de 02 anos" if x == 1 else "02 anos ou mais", index=1, key="tempo_casamento_uniao_pensao")
+        if tempo_casamento_uniao_opcoes == 1:
+            tempo_casmento_uniao = (f"menos de dois anos")
+        else:
+            tempo_casamento_uniao = (f"dois anos, ou mais,")
+        if carencia_instituidor_opcoes == 1 or tempo_casamento_uniao_opcoes == 1:
             tempo = "por 4 meses"
-        if carencia_instituidor == 2 and tempo_casamento_uniao == 2 and data_vigencia <= data_do_obito_convertida < data_atualizacao:
+        if carencia_instituidor_opcoes == 2 and tempo_casamento_uniao_opcoes == 2 and data_vigencia <= data_do_obito_convertida < data_atualizacao:
             if idade_autor < 21:
                 tempo = "por 3 anos"
             if 21 <= idade_autor <= 26:
@@ -92,7 +100,7 @@ def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
                 tempo = "por 20 anos"
             if idade_autor >= 44:
                 tempo = "de forma vitalícia"
-        if carencia_instituidor == 2 and tempo_casamento_uniao == 2 and data_atualizacao <= data_do_obito_convertida:
+        if carencia_instituidor_opcoes == 2 and tempo_casamento_uniao_opcoes == 2 and data_atualizacao <= data_do_obito_convertida:
             if idade_autor < 22:
                 tempo = "por 3 anos"
             if 22 <= idade_autor <= 27:
