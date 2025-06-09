@@ -725,7 +725,7 @@ if resultado == 1:
         fundamento_procedencia.append([(f"Quanto à condição de dependente, a parte autora comprova ser {dependente} do(a) instituidor(a).")])
         if dependente_opcoes == 1:
             fundamento_procedencia.append(f"Foi apresentado certidão casamento, realizado em {data_casamento}.")
-        if dependente_opceos == 3:
+        if dependente_opcoes == 3:
             fundamento_procedencia.append(f"Foi apresentado certidão de nascimento / documento de identificação civil, que comprova a filiação, com nascimento em {data_nascimento}.")
         if dependente_opcoes == 4:
             fundamento_procedencia.append(f"Foi realizada perícia médica que comprova a condição de inválido, deficiente intelectual ou mental, ou deficiente grave, da parte autora.")
