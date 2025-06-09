@@ -690,8 +690,8 @@ if resultado == 1:
                 pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
             if dependente_incapaz == 2:
                 pensao_prazo = tempo
-            if tempo == "de forma vitalícia":
-                pensao_prazo = "de forma vitalícia"                
+        if tempo == "de forma vitalícia":
+            pensao_prazo = "de forma vitalícia"                
     dib = st.text_input("DIB (dd/mm/aaaa):")
     motivo_DIB = st.radio("DIB fixada na DER?", [1,2,3],
                     format_func = lambda x: "DIB na DER" if x == 1 else "DIB no óbito" if x == 2 else "DIB fixada em outra data (necessário esclarecer)")
