@@ -648,8 +648,8 @@ if resultado == 1:
                         pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
                     if dependente_incapaz == 2:
                         pensao_prazo = tempo
-                    if tempo == "de forma vitalícia":
-                        pensao_prazo = "de forma vitalícia"    
+                if tempo == "de forma vitalícia":
+                    pensao_prazo = "de forma vitalícia"    
             if alimentos == 2:
                 tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
         if ha_sentenca_alimentos == 2:
@@ -761,7 +761,7 @@ if resultado == 1:
         if dependente_opcoes == 1:
             fundamento_procedencia.append(f"Considerando que a parte autora é cônjuge por {tempo_casamento_uniao} (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
         if dependente_opcoes == 2:
-            fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}")
+            fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
         if dependente_opcoes in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
             fundamento_procedencia.append(f"Assim, a parte autora faz jus ao benefício pleiteado de pensão por morte {pensao_prazo}.")
         fundamento_procedencia.extend([
