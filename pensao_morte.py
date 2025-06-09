@@ -757,11 +757,12 @@ if resultado == 1:
                 if linha.split():
                     fundamento_procedencia.append(linha)
             fundamento_procedencia.append(f"{conclusao}")
-            if dependente_incapaz == 1 and tempo != "de forma vitalícia":
-                fundamento_procedencia.append(f"Foi realizada perícia médica que comprova a condição de inválido, deficiente intelectual ou mental, ou deficiente grave, conforme o disposto no artigo 16, § 2º, da Lei n. 8.213/91.")
-                for linha in pericia.split("\n"):
-                    if linha.split():
-                        fundamento_procedencia.append(linha)
+            if tempo != "de forma vitalícia":
+                if dependente_incapaz == 1:
+                    fundamento_procedencia.append(f"Foi realizada perícia médica que comprova a condição de inválido, deficiente intelectual ou mental, ou deficiente grave, conforme o disposto no artigo 16, § 2º, da Lei n. 8.213/91.")
+                    for linha in pericia.split("\n"):
+                        if linha.split():
+                            fundamento_procedencia.append(linha)
         if dependente_opcoes == 1 and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
         if dependente_opcoes == 1 and data_do_obito_convertido >= date(2015, 1, 3):
