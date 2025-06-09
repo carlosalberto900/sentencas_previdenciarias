@@ -640,7 +640,7 @@ if resultado == 1:
             alimentos = st.radio("No caso, a parte trouxe sentença de comprove fixação de pensão alimentícia temporária, ou não há prazo final fixado para a pensão alimentícia?", [1, 2], format_func=lambda x: "Temporária" if x == 1 else "Sem prazo")
             if alimentos == 1:
                 prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
-                tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+                tempo_casamento_uniao, carencia_instituidor, tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
                 if not tempo == "de forma vitalícia":        
                     dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
                     if dependente_incapaz == 1:
