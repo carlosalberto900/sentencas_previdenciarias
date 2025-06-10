@@ -655,7 +655,7 @@ if resultado == 1:
                         pensao_prazo = tempo
                 if tempo == "de forma vitalícia":
                     pensao_prazo = "de forma vitalícia"
-                qual_prazo_pensao = st.radio(f"O prazo da pensão deve ser o menor, entre a data de término da pensão alimentícia e o prazo fixado por lei, se a pensão alimentícia não fosse temporária./n/n
+                qual_prazo_pensao = st.radio("O prazo da pensão deve ser o menor, entre a data de término da pensão alimentícia e o prazo fixado por lei, se a pensão alimentícia não fosse temporária./n/n
                 Considerando que pensão alimentícia encerraria em {prazo_alimentos}, a previsão legal seria de manutenção do benefício {prazo_pensao}, qual é o menor?", [1,2], format_func=lambda x: "pensão alimentícia" if x == 1 else "prazo legal", key="qual_prazo_pensao")
                 if qual_prazo_pensao == 1:
                     pensao_prazo = f"até {prazo_alimentos}"
