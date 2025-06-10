@@ -789,7 +789,7 @@ if resultado == 1:
         if dependente_opcoes == 1 and data_do_obito_convertida >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
         if dependente_opcoes == 2 and data_do_obito_convertida >= date(2015, 1, 3):
-            fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
+            fundamento_procedencia.append(f"Considerando que a parte autora viveu em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
         if dependente_opcoes in [5,6] and data_do_obito_convertida >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que a lei prevê que o prazo para pensão por morte é o menor prazo entre (1) aquele previsto em lei para a pensão do cônjuge, e (2) aquele fixado previamente em caso de pensão alimentícia temporária, no caso em tela, a pensão por morte será devida {pensao_prazo}.")        
         if dependente_opcoes in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
