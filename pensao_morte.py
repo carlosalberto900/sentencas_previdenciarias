@@ -654,9 +654,24 @@ if resultado == 1:
                     if dependente_incapaz == 2:
                         pensao_prazo = tempo
                 if tempo == "de forma vitalícia":
-                    pensao_prazo = "de forma vitalícia"    
+                    pensao_prazo = "de forma vitalícia"
+                qual_prazo_pensao = st.radio(f"O prazo da pensão deve ser o menor, entre a data de término da pensão alimentícia e o prazo fixado por lei, se a pensão alimentícia não fosse temporária./n/n
+                Considerando que pensão alimentícia encerraria em {prazo_alimentos}, a previsão legal seria de manutenção do benefício {prazo_pensao}, qual é o menor?", [1,2], format_func=lambda x: "pensão alimentícia" if x == 1 else "prazo legal", key="qual_prazo_pensao")
+                if qual_prazo_pensao == 1:
+                    pensao_prazo = f"até {prazo_alimentos}"
+                if qual_prazo_pensao == 2:
+                    pensao_prazo
             if alimentos == 2:
                 tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+                if not tempo == "de forma vitalícia":        
+                    dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                    if dependente_incapaz == 1:
+                        pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+                        pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
+                    if dependente_incapaz == 2:
+                        pensao_prazo = tempo
+                if tempo == "de forma vitalícia":
+                    pensao_prazo = "de forma vitalícia"
         if ha_sentenca_alimentos == 2:
             lei13846 = date(2019, 6, 18)
             if data_do_obito_convertida < lei13846:
@@ -764,14 +779,14 @@ if resultado == 1:
                     for linha in pericia.split("\n"):
                         if linha.split():
                             fundamento_procedencia.append(linha)
-        if dependente_opcoes == 1 and data_do_obito_convertida < date(2015, 1, 3):
+        if dependente_opcoes in [1, 2, 5, 6] and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
         if dependente_opcoes == 1 and data_do_obito_convertido >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
-        if dependente_opcoes == 2 and data_do_obito_convertida < date(2015, 1, 3):
-            fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
-        if dependente_opcoes == 2:
+        if dependente_opcoes == 2 and data_do_obito_convertido >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
+        if dependente_opcoes in [5,6] and data_do_obito_convertida >= date(2015, 1, 3):
+            fundamento_procedencia.append(f"Considerando que a lei prevê que o prazo para pensão por morte é o menor prazo entre (1) aquele previsto em lei para a pensão do cônjuge, e (2) aquele fixado previamente em caso de pensão alimentícia temporária, no caso em tela, a pensão por morte será devida {pensao_prazo}.")        
         if dependente_opcoes in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
             fundamento_procedencia.append(f"Assim, a parte autora faz jus ao benefício pleiteado de pensão por morte {pensao_prazo}.")
         fundamento_procedencia.extend([
