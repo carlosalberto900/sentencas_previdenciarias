@@ -646,9 +646,9 @@ if resultado == 1:
             if alimentos == 1:
                 prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
                 tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
-                qual_prazo_pensao = st.radio(f"""O prazo da pensão deve ser o menor entre:\n\n
-                                            - a data de término da pensão alimentícia ({prazo_alimentos}), e\n\n
-                                            - o prazo fixado por lei para a pensão por morte de cônjuge (no caso concreto, seria {tempo}).
+                qual_prazo_pensao = st.radio(f"""O prazo da pensão deve ser o menor entre:
+                                            (1) a data de término da pensão alimentícia ({prazo_alimentos}), e
+                                            (2) o prazo fixado por lei para a pensão por morte de cônjuge (no caso concreto, seria {tempo}).
                                             Qual dos prazos deve ser considerado?""",
                                                 [1, 2],
                                                 format_func=lambda x: "pensão alimentícia" if x == 1 else "prazo legal",
