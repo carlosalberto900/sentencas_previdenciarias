@@ -646,18 +646,9 @@ if resultado == 1:
             if alimentos == 1:
                 prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
                 tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
-                if not tempo == "de forma vitalícia":        
-                    dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
-                    if dependente_incapaz == 1:
-                        pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-                        pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
-                    if dependente_incapaz == 2:
-                        pensao_prazo = tempo
-                if tempo == "de forma vitalícia":
-                    pensao_prazo = "de forma vitalícia"
                 qual_prazo_pensao = st.radio(f"""O prazo da pensão deve ser o menor entre:
                                             - a data de término da pensão alimentícia ({prazo_alimentos}), e
-                                            - o prazo fixado por lei, se a pensão alimentícia não fosse temporária ({prazo_pensao}).
+                                            - o prazo fixado por lei, se a pensão alimentícia não fosse temporária ({tempo}).
                                             Qual dos prazos deve ser considerado?""",
                                                 [1, 2],
                                                 format_func=lambda x: "pensão alimentícia" if x == 1 else "prazo legal",
@@ -666,7 +657,15 @@ if resultado == 1:
                 if qual_prazo_pensao == 1:
                     pensao_prazo = f"até {prazo_alimentos}"
                 if qual_prazo_pensao == 2:
-                    pensao_prazo
+                    if tempo != "de forma vitalícia":        
+                        dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                        if dependente_incapaz == 1:
+                            pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
+                            pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
+                        if dependente_incapaz == 2:
+                            pensao_prazo = tempo
+                    if tempo == "de forma vitalícia":
+                        pensao_prazo = "de forma vitalícia"                
             if alimentos == 2:
                 tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
                 if not tempo == "de forma vitalícia":        
