@@ -729,7 +729,7 @@ if resultado == 1:
             for linha in prova_material_qs_instituidor.split("\n"):
                 if linha.split():
                     fundamento_procedencia.append(linha)
-            fundamento_procedencia.append([(f"Foram ouvidas as seguintes testemunhas:")])
+            fundamento_procedencia.append([(f"Houve oitiva de testemunha(s):")])
             for linha in depoimentos_qs_instituidor.split("\n"):
                 if linha.split():
                     fundamento_procedencia.append(linha)
@@ -752,7 +752,7 @@ if resultado == 1:
                 for linha in inicio_prova_material_dependente.split("\n"):
                     if linha.split():
                         fundamento_procedencia.append(linha)
-            fundamento_procedencia.append(f"Foram ouvidas as seguintes testemunhas:")
+            fundamento_procedencia.append(f"Houve oitiva de testemunha(s):")
             for linha in depoimentos.split("\n"):
                 if linha.split():
                     fundamento_procedencia.append(linha)
