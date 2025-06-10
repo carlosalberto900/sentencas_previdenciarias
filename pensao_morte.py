@@ -79,12 +79,12 @@ def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
         tempo = "de forma vitalícia"
     if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
         idade_autor = int(st.number_input("Qual a idade da parte autora na data do óbito? (Digite apenas números):", min_value=0, max_value=150, step=1, key="idade_autor_pensao"))
-        carencia_instituidor_opcoes = st.radio("O instituidor tem quantas contribuições vertidas em vida?", [1,2], format_func=lambda x: "menos de 18 contribuições" if x == 1 else "18 contribuições ou mais", index=1, key="carencia_instituidor_pensao")
+        carencia_instituidor_opcoes = st.radio("O instituidor tem quantas contribuições vertidas em vida?", [1,2], format_func=lambda x: "menos de 18 contribuições" if x == 1 else "18 contribuições ou mais", index=0, key="carencia_instituidor_pensao")
         if carencia_instituidor_opcoes == 1:
             carencia_instituidor = f"menos de 18 contribuições"
         else:
             carencia_instituidor = f"18 (dezoito) contribuições, ou mais,"
-        tempo_casamento_uniao_opcoes = st.radio("Qual o tempo do casamento/união estável da parte autora?", [1,2], format_func=lambda x: "menos de 02 anos" if x == 1 else "02 anos ou mais", index=1, key="tempo_casamento_uniao_pensao")
+        tempo_casamento_uniao_opcoes = st.radio("Qual o tempo do casamento/união estável da parte autora?", [1,2], format_func=lambda x: "menos de 02 anos" if x == 1 else "02 anos ou mais", index=0, key="tempo_casamento_uniao_pensao")
         if tempo_casamento_uniao_opcoes == 1:
             tempo_casamento_uniao = f"menos de dois anos"
         else:
@@ -786,9 +786,9 @@ if resultado == 1:
                             fundamento_procedencia.append(linha)
         if dependente_opcoes in [1, 2, 5, 6] and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
-        if dependente_opcoes == 1 and data_do_obito_convertido >= date(2015, 1, 3):
+        if dependente_opcoes == 1 and data_do_obito_convertida >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
-        if dependente_opcoes == 2 and data_do_obito_convertido >= date(2015, 1, 3):
+        if dependente_opcoes == 2 and data_do_obito_convertida >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
         if dependente_opcoes in [5,6] and data_do_obito_convertida >= date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que a lei prevê que o prazo para pensão por morte é o menor prazo entre (1) aquele previsto em lei para a pensão do cônjuge, e (2) aquele fixado previamente em caso de pensão alimentícia temporária, no caso em tela, a pensão por morte será devida {pensao_prazo}.")        
