@@ -73,7 +73,8 @@ def prazo_pensao_conjuge_companheira(data_do_obito_convertida):
     data_atualizacao = date(2021, 1, 1) #vigencia da portaria que aumentou um ano
     tempo_casamento_uniao = ""
     carencia_instituidor = ""
-    tempo = ""    
+    tempo = ""
+    idade_autor = ""
     if data_do_obito_convertida < data_vigencia:
         tempo = "de forma vitalícia"
     if data_vigencia <= data_do_obito_convertida < data_atualizacao or data_atualizacao <= data_do_obito_convertida:
