@@ -644,7 +644,7 @@ if resultado == 1:
             alimentos = st.radio("No caso, a parte trouxe sentença de comprove fixação de pensão alimentícia temporária, ou não há prazo final fixado para a pensão alimentícia?", [1, 2], format_func=lambda x: "Temporária" if x == 1 else "Sem prazo")
             if alimentos == 1:
                 prazo_alimentos = st.text_input("Qual o prazo de duração da pensão alimentícia temporária? (Escreva no formato dd/mm/aaaa):")
-                tempo_casamento_uniao, carencia_instituidor, tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+                tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
                 if not tempo == "de forma vitalícia":        
                     dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
                     if dependente_incapaz == 1:
@@ -655,7 +655,7 @@ if resultado == 1:
                 if tempo == "de forma vitalícia":
                     pensao_prazo = "de forma vitalícia"    
             if alimentos == 2:
-                tempo_casamento_uniao, carencia_instituidor, tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+                tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
         if ha_sentenca_alimentos == 2:
             lei13846 = date(2019, 6, 18)
             if data_do_obito_convertida < lei13846:
@@ -664,7 +664,7 @@ if resultado == 1:
                 inicio_prova_material_dependente = st.text_area("Qual(is) elemento(s) a parte autora trouxe como início de prova material? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             depoimentos = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
-            tempo_casamento_uniao, carencia_instituidor, tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+            tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
             if not tempo == "de forma vitalícia":        
                 dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
                 if dependente_incapaz == 1:
@@ -686,7 +686,7 @@ if resultado == 1:
         if dependente_opcoes in [7, 8, 9, 10, 11, 12, 13, 14, 15]:
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
     if dependente_opcoes in [1, 2]:
-        tempo_casamento_uniao, carencia_instituidor, tempo = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
+        tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
         if not tempo == "de forma vitalícia":        
             dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
             if dependente_incapaz == 1:
@@ -766,11 +766,11 @@ if resultado == 1:
         if dependente_opcoes == 1 and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
         if dependente_opcoes == 1 and data_do_obito_convertido >= date(2015, 1, 3):
-            fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
+            fundamento_procedencia.append(f"Considerando que o tempo de casamento da parte autora (data de casamento: {data_casamento}) do(a) instituidor(a) , Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
         if dependente_opcoes == 2 and data_do_obito_convertida < date(2015, 1, 3):
             fundamento_procedencia.append(f"Considerando que o obito ocorreu antes da vigência da Lei n. 13.135/2015, fruto da conversão da MP 664/2014, a pensão por morte é vitalícia")  
         if dependente_opcoes == 2:
-            fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}.")
+            fundamento_procedencia.append(f"Considerando que a parte autora vive em união estável por {tempo_casamento_uniao} com o(a) instituidor(a), Sr(a). {instituidor}, que em vida possuía {carencia_instituidor} vertidas, faz jus ao benefício pleiteado de pensão por morte, {pensao_prazo}, por possuir {idade_autor} anos de idade, ao tempo do óbito.")
         if dependente_opcoes in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
             fundamento_procedencia.append(f"Assim, a parte autora faz jus ao benefício pleiteado de pensão por morte {pensao_prazo}.")
         fundamento_procedencia.extend([
