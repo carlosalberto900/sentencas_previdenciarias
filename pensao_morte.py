@@ -719,7 +719,7 @@ if resultado == 1:
         doc.add_paragraph(f"Processo: {processo_formatado}")
         texto_base(doc, fundamento_questao)
         fundamento_procedencia = [
-            (f"A parte autora comprova a qualidade de segurado do(a) instituidor(a), Sr(a). {instituidor}, ao tempo do óbito em {data_do_obito}, conforme o disposto no artigo 15, inciso I, da Lei n. 8.213/91."),
+            (f"A parte autora comprova a qualidade de segurado do(a) instituidor(a), Sr(a). {instituidor}, ao tempo do óbito em {data_do_obito}."),
             ]
         if caso_exige_prova_material_qs_instituidor == 2:
             for linha in qualidade_segurado.split("\n"):
