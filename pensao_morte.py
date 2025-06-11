@@ -777,7 +777,9 @@ if resultado == 1:
             for linha in depoimentos.split("\n"):
                 if linha.split():
                     fundamento_procedencia.append(linha)
-            fundamento_procedencia.append(f"{conclusao}")
+            for linha in conclusao.split("\n"):
+                if linha.split():
+                    fundamento_procedencia.append(linha)
             if tempo != "de forma vitalícia":
                 if dependente_incapaz == 1:
                     fundamento_procedencia.append(f"Foi realizada perícia médica que comprova a condição de inválido, deficiente intelectual ou mental, ou deficiente grave, conforme o disposto no artigo 16, § 2º, da Lei n. 8.213/91.")
