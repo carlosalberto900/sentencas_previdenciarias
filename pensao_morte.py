@@ -767,7 +767,7 @@ if resultado == 1:
                     fundamento_procedencia.append(linha)
         if dependente_opcoes in [2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
             if data_do_obito_convertida < lei13846:
-                fundamento_procedencia.append(f"inicio_prova_material_dependente")
+                fundamento_procedencia.append(f"{inicio_prova_material_dependente}")
             if lei13846 <= data_do_obito_convertida:
                 fundamento_procedencia.append(f"Foi apresentado início de prova material, que comprova a condição de dependente da parte autora, conforme o disposto no artigo 16, § 5º, da Lei n. 8.213/91.")  
                 for linha in inicio_prova_material_dependente.split("\n"):
