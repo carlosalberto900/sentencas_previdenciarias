@@ -289,7 +289,7 @@ if resultado == 2:
                     lista = [
                         (f"Observo que a parte autora, além da sentença, trouxe outros elementos que não podem ser aceitos como início de prova material.")
                         ]
-                    for linha in lista.split("\n"):
+                    for linha in outros_documentos.split("\n"):
                         if linha.split():
                             lista.append(linha)
                     ft.alinhamento_parag_dispositivo(doc, lista)
