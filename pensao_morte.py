@@ -207,10 +207,13 @@ with col2:
     except ValueError:
         st.error("Data inválida. Use o formato DD/MM/AAAA.")
         st.stop()
+
 resultado = st.radio("O pedido é procedente ou improcedente (ou aplicação Tema 629 STJ)?", [1, 2], format_func=lambda x: "Procedente" if x == 1 else "Improcedente (ou aplicação de Tema 629 STJ)")
 #IMPROCEDENTE
 if resultado == 2:
+    st.divider()
     motivo_improcedencia = st.radio("Qual o motivo da improcedência?", [1, 2], format_func=lambda x: "Falta de qualidade de segurado do(a) instituidor(a) falecido" if x==1 else "A parte autora não comprova ser dependente do falecido")
+    st.divider()
     #FALTA DE QUALIDADE DE SEGURADO DO INSTITUIDOR
     if motivo_improcedencia == 1:
         hipotese = st.radio("Qual hipótese melhor se enquadra no caso?", [1, 2, 3, 4, 5, 6], format_func=lambda x: 

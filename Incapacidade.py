@@ -174,9 +174,9 @@ else:
 
     if tipo == 1:
         por_que_concedeu_ap_invalidez = st.radio ("Por que foi concedida aposentadoria por invalidez?", [1, 2],
-                                                format_func = lambda x: ["Sendo a incapacidade total e permanente, satisfaz a parte autora o requisito de incapacidade hábil à concessão de benefício por incapacidade permanente.", "Mesmo sendo a incapacidade permanente, mas clinicamente parcial, percebe-se que a parte autora, dada sua situação concreta de instrução e idade, é insusceptível de reabilitação, de forma que impede a parte de prover sua manutenção (súmula 47 TNU)."] [x-1])
+                                                format_func = lambda x: ["Sendo a incapacidade total e permanente, satisfaz a parte autora o requisito de incapacidade hábil à concessão de benefício por incapacidade permanente.", "Mesmo sendo a incapacidade permanente, mas clinicamente parcial, percebe-se que a parte autora, dada sua situação concreta de instrução e idade, é insusceptível de reabilitação, impedida de prover sua manutenção (súmula 47 TNU), fazendo jus ao benefício por incapacidade permanente."] [x-1])
         if por_que_concedeu_ap_invalidez == 2:
-            observacao_sobre_aposentadoria_invalidez = "Mesmo sendo a incapacidade permanente, mas clinicamente parcial, percebe-se que a parte autora, dada sua situação concreta de instrução e idade, é insusceptível de reabilitação, de forma que impede a parte de prover sua manutenção (súmula 47 TNU)."
+            observacao_sobre_aposentadoria_invalidez = "Mesmo sendo a incapacidade permanente, mas clinicamente parcial, percebe-se que a parte autora, dada sua situação concreta de instrução e idade, é insusceptível de reabilitação, impedida de prover sua manutenção (súmula 47 TNU), fazendo jus ao benefício por incapacidade permanente."
             explicando_sumula_47 = st.text_area("Explique no caso concreto, por qual motivo aplicou-se a súmula 47 da TNU: (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final)")
         else:
             observacao_sobre_aposentadoria_invalidez = "Sendo a incapacidade total e permanente, satisfaz a parte autora o requisito de incapacidade hábil à concessão de benefício por incapacidade permanente."
@@ -239,8 +239,7 @@ else:
                     (f"Carência - {carencia}"),
                     (f"A prova técnica produzida no processo é determinante em casos em que a incapacidade somente pode ser aferida por médico perito, profissional habilitado a fornecer ao Juízo elementos técnicos para formação de sua convicção."),
                     (f"Afasto qualquer necessidade de complementação do laudo, ou necessidade de resposta a novos quesitos. O laudo é claro em sua conclusão, e não há imprecisões que o comprometa ou infirmem suas conclusões. Os peritos deste Juízo são profissionais equidistantes das partes e com habilidades técnicas necessárias para a aferição quanto à existência ou não de incapacidade da parte autora, não há razões para que o laudo médico pericial seja recusado. Ademais, o laudo pericial foi emitido com base no quadro clínico verificado por ocasião da(s) perícia(s) médica(s), através de exames físicos, bem como na história clínica, através dos exames apresentados pela parte autora na data da sua perícia judicial."),
-                    (f"Diante do cenário do caso concreto, restando comprovada que a incapacidade laboral da parte autora o benefício que deve ser concedido é o {beneficio_concedido}"),
-                    (f"{observacao_sobre_aposentadoria_invalidez}"),         
+                    (f"{observacao_sobre_aposentadoria_invalidez}")
             ]
             if por_que_concedeu_ap_invalidez == 2:
                 for linha in explicando_sumula_47.split('\n'):
@@ -279,7 +278,6 @@ else:
             (f"Carência - {carencia}"),
             (f"A prova técnica produzida no processo é determinante em casos em que a incapacidade somente pode ser aferida por médico perito, profissional habilitado a fornecer ao Juízo elementos técnicos para formação de sua convicção."),
             (f"Afasto qualquer necessidade de complementação do laudo, ou necessidade de resposta a novos quesitos. O laudo é claro em sua conclusão, e não há imprecisões que o comprometa ou infirmem suas conclusões. Os peritos deste Juízo são profissionais equidistantes das partes e com habilidades técnicas necessárias para a aferição quanto à existência ou não de incapacidade da parte autora, não há razões para que o laudo médico pericial seja recusado. Ademais, o laudo pericial foi emitido com base no quadro clínico verificado por ocasião da(s) perícia(s) médica(s), através de exames físicos, bem como na história clínica, através dos exames apresentados pela parte autora na data da sua perícia judicial."),
-            (f"Diante do cenário do caso concreto, restando comprovada que a incapacidade laboral da parte autora o benefício que deve ser concedido é o {beneficio_concedido}"),
             (f"{observacao_sobre_auxilio_doenca}"),
             (f"Fixo a DIB em {dib}. {motivo_DIB_redigido}"),
             (f"{motivo_da_DCB_redigido}"),

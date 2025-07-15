@@ -9,10 +9,15 @@ def aviso_sentenca_nao_implementada():
         time.sleep(0.02)  # ajuste o tempo se quiser mais rápido ou mais lento
 
 # Interface gráfica com Streamlit
-st.title("GERADOR DE SENTENÇAS EM BENEFÍCIOS PREVIDENCIÁRIOS")
-st.title("PARA JUIZADO ESPECIAL FEDERAL")
-st.write("Criado por: Carlos Alberto Antonio Junior - Juiz Federal - TRF3")
-st.write("1 Vara Federal com JEF Adjunto em Caraguatatuba/SP")
+
+st.markdown("## 👩‍⚖️👨‍⚖️ Sistema de Apoio à Sentença Previdenciária")
+st.caption("Justiça Federal – 1ª Vara Federal com JEF Adjunto em Caraguatatuba")
+st.caption("Criado por: Carlos Alberto Antonio Junior - Juiz Federal - TRF3")
+st.divider()
+# st.title("GERADOR DE SENTENÇAS EM BENEFÍCIOS PREVIDENCIÁRIOS")
+# st.title("PARA JUIZADO ESPECIAL FEDERAL")
+# st.write("Criado por: Carlos Alberto Antonio Junior - Juiz Federal - TRF3")
+# st.write("1 Vara Federal com JEF Adjunto em Caraguatatuba/SP")
 # Input do processo
 processo = st.text_input("Qual o número do processo? O número do processo contém 20 dígitos numéricos.")
 if processo:
