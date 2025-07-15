@@ -25,22 +25,21 @@ if 'processo_formatado' in locals():
     st.write(f"Processo: {processo_formatado}")
 
     beneficio = st.radio("Qual o benefício será analisado?",
-                         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                         [1, 2, 3, 4, 5, 6, 7],
                          format_func=lambda x:
                          "21 - Pensão por morte previdenciária" if x==1 else
                          "25 - Auxílio-reclusão" if x==2 else
                          "31 - Auxílio por incapacidade temporária\n\n"
                          "32 - Aposentadoria por incapacidade permanente" if x==3 else
                          "36 - Auxílio-acidente previdenciário" if x==4 else
-                         "41 - Aposentadoria por idade" if x==5 else
-                         "42 - Aposentadoria por tempo de contribuição" if x==6 else
-                         "46 - Aposentadoria especial" if x==7 else
-                         "57 - Aposentadoria por tempo de serviço de professor" if x==8 else
-                         "80 - Salário-maternidade" if x==9 else
+                         "41 - Aposentadoria por idade\n\n"
+                         "42 - Aposentadoria por tempo de contribuição (com ou sem conversão de tempo especial)\n\n"
+                         "46 - Aposentadoria especial\n\n"
+                         "57 - Aposentadoria por tempo de contribuição do professor" if x==5 else
+                         "80 - Salário-maternidade" if x==6 else
                          "87 - Amparo assistencial ao deficiente (LOAS)\n\n"
                          "88 - Amparo assistencial ao deficiente ou ao idoso (LOAS)"                         
                          )
-    
     if beneficio == 1:
         exec(open("pensao_morte.py").read())
     if beneficio == 2:
@@ -50,14 +49,9 @@ if 'processo_formatado' in locals():
     if beneficio == 4:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 5:
-        st.write_stream(aviso_sentenca_nao_implementada)
+        exec(open("aposentadorias.py").read())
     if beneficio == 6:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 7:
-        st.write_stream(aviso_sentenca_nao_implementada)
-    if beneficio == 8:
-        st.write_stream(aviso_sentenca_nao_implementada)
-    if beneficio == 9:
-        st.write_stream(aviso_sentenca_nao_implementada)
-    if beneficio == 10:
-        exec(open("LOAS.py").read()) 
+        exec(open("loas.py").read()) 
+
