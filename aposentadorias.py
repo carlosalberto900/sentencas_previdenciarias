@@ -153,6 +153,47 @@ def montar_payload_final(novo_payload):
 
 API_URL = "https://fabrica-de-calculos.dev.trf3.jus.br/api/v1/tempo/calcular"
 
+# fundamento_questao = st.radio(
+# "**Relatório e fundamentação jurídica**\n\n"
+# "Toda sentença gerada possui dispensa de relatório e uma fundamentação jurídica básica, que vai até onde se inicia a análise do caso concreto.\n\n"  
+# "Você pode usar esta fundamentação, ou fornecer sua **própria fundamentação**, com ou sem relatório (fazendo menção à dispensa, se for o caso.)\n\n"  
+# "**Como você deseja prosseguir?**",
+# [1, 2],
+# format_func=lambda x: "Vou usar a fundamentação padrão deste aplicativo." if x == 1 else "Desejo fornecer a minha fundamentação."
+# )
+# if fundamento_questao == 1:
+#     fundamento_base = [
+                    # f"Com a promulgação da Emenda Constitucional nº 103, de 13 de novembro de 2019, o sistema previdenciário brasileiro passou por uma profunda reformulação, com especial impacto sobre os requisitos e as modalidades de concessão das aposentadorias no âmbito do Regime Geral de Previdência Social (RGPS). As antigas espécies denominadas aposentadoria por idade e aposentadoria por tempo de contribuição foram reagrupadas sob o título de aposentadoria programada, constituindo a nova espinha dorsal da previdência social pública.",
+                    # f"A aposentadoria programada é devida aos segurados filiados ao RGPS a partir da vigência da EC nº 103/2019. São exigidos, cumulativamente, os seguintes requisitos: (i) 62 anos de idade para a mulher e 65 anos para o homem; (ii) 15 anos de tempo de contribuição para a mulher e 20 anos para o homem; e (iii) 180 contribuições mensais de carência.",
+                    # f"Para os segurados que já se encontravam filiados ao RGPS até a data da promulgação da referida emenda constitucional, foram instituídas regras de transição, com vistas a mitigar os impactos da nova ordem jurídica sobre situações consolidadas. As regras de transição têm aplicação imediata aos pedidos protocolados a partir de 13 de novembro de 2019, assegurado o direito adquirido àqueles que já preenchiam os requisitos para aposentadoria pelas normas anteriores.",
+                    # f"As principais regras de transição são as seguintes:",
+                    # f"1. Aposentadoria por Idade – Regra de Transição (art. 18 da EC 103/2019)",
+                    # f"Aplica-se à mulher que tenha, no mínimo, 15 anos de tempo de contribuição. A idade mínima, originalmente de 60 anos, é acrescida de seis meses a cada ano, iniciando-se em 2020, até atingir 62 anos em 2023. Para o homem, a regra permanece inalterada: 65 anos de idade e 15 anos de tempo de contribuição.",
+                    # f"2. Aposentadoria por Tempo de Contribuição – Regras de Transição",
+                    # f"As aposentadorias por tempo de contribuição, ainda que extintas para os novos segurados, podem ser concedidas aos filiados até 13 de novembro de 2019 mediante o cumprimento de uma das seguintes regras de transição:",
+                    # f"a) Sistema de Pontos (art. 15 da EC 103/2019)",
+                    # f"Exige-se o cumprimento simultâneo de: 30 anos de tempo de contribuição para mulheres e 35 para homens; 180 meses de carência; e soma da idade com o tempo de contribuição, atingindo pontuação mínima progressiva: em 2019, 86 pontos (mulher) e 96 pontos (homem); acrescendo-se 1 ponto por ano, até alcançar, em 2033, 100 pontos (mulher) e 105 pontos (homem).",
+                    # f"b) Idade Mínima Progressiva (art. 16 da EC 103/2019)",
+                    # f"Exige-se: 30 anos de tempo de contribuição para a mulher e 35 para o homem; 180 meses de carência; e idade mínima inicial de 56 anos (mulher) e 61 anos (homem), com acréscimo de 6 meses por ano, até atingir, em 2031, a idade de 62 anos (mulher) e 65 anos (homem).",
+                    # f"c) Pedágio de 50% (art. 17 da EC 103/2019)",
+                    # f"Aplicável apenas a quem, na data da EC 103/2019, já havia cumprido 28 anos (mulher) ou 33 anos (homem) de contribuição. Exige-se: cumprimento do tempo mínimo de 30/35 anos; pagamento de um pedágio de 50% do tempo que faltava para atingir o tempo mínimo em 13/11/2019; e 180 contribuições mensais de carência.",
+                    # f"d) Pedágio de 100% com Idade Mínima (art. 20 da EC 103/2019)",
+                    # f"Exige-se: idade mínima de 57 anos (mulher) e 60 anos (homem); 30/35 anos de contribuição acrescidos de um pedágio de 100% do tempo que faltava para atingir esse tempo mínimo em 13/11/2019; e 180 meses de carência.",
+                    # f"3. Aposentadoria Programada Especial (art. 19 da EC 103/2019)",
+                    # f"Voltada a trabalhadores que atuam expostos a agentes nocivos, a nova sistemática exige, além dos 180 meses de carência, os seguintes critérios: idade mínima de 55, 58 ou 60 anos, conforme a atividade especial exija 15, 20 ou 25 anos de exposição efetiva; e tempo de contribuição correspondente à atividade insalubre.",
+                    # f"Na regra de transição (art. 21), exige-se pontuação mínima (soma entre idade e tempo de contribuição), aliada ao tempo de exposição: 66 pontos (15 anos), 76 pontos (20 anos) ou 86 pontos (25 anos).",
+                    # f"4. Aposentadoria Programada do Professor (art. 201, §8º, da CF)",
+                    # f"Aplicável a quem exerce exclusivamente funções de magistério na educação básica. A regra permanente exige: 57 anos de idade (mulher) e 60 anos (homem); 25 anos de tempo de contribuição (mulher) e 30 anos (homem); e 180 meses de carência.",
+                    # f"Regras de transição: pontuação de 81 pontos (mulher) e 91 (homem) em 2019, com acréscimo de 1 ponto ao ano até 92/100; idade mínima inicial de 51 anos (mulher) e 56 anos (homem), com acréscimo de 6 meses por ano, até alcançar 57/60; e pedágio de 100% para quem estava próximo do tempo mínimo em 13/11/2019, exigindo idade mínima de 52 anos (mulher) e 55 (homem), com tempo de contribuição acrescido do pedágio, além da carência.",
+                    # f"As modificações introduzidas pela EC 103/2019 alteraram profundamente o sistema de acesso às aposentadorias do RGPS. As regras de transição refletem um esforço de preservação dos direitos em formação, assegurando uma adaptação gradativa às novas exigências constitucionais."
+                    # ]
+
+# else:
+#     fundamento_custom = st.text_area(
+#         "Redija, ou copie e cole, a fundamentação que deseja inserir na sentença. \nO texto deve englobar tudo, desde o 'vistos em sentença' até um parágrafo assim redigido: 'Feitas estas considerações, passo a analisar o caso concreto', ou expressão equivalente."
+#         )
+
+
 st.subheader("Fábrica de Cálculos - TRF3")
 st.write("Acesse a Fábrica de Cálculos (TRF3), em https://www.trf3.jus.br/cecalc/tc/ e siga os passos para realizar o cálculo de tempo de contribuição. Após, salve seu cálculo, em seu computador, em arquivo com qualquer nome, com extensão .calc. Faça o upload o arquivo que você salvou, no campo abaixo")
 
