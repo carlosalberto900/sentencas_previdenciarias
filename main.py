@@ -58,5 +58,5 @@ if 'processo_formatado' in locals():
     if beneficio == 6:
         st.write_stream(aviso_sentenca_nao_implementada)
     if beneficio == 7:
-        exec(open("loas.py").read()) 
+        exec(open("LOAS.py").read()) 
 
