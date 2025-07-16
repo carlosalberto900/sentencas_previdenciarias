@@ -625,8 +625,8 @@ if uploaded_file:
                                     aposentadoria = f"{b.get('descricao')} com fundamento na {b.get('fundamento')}"
                                     beneficio_mais_vantajoso = aposentadoria.lower()
 
-                    if st.session_state["dados_basicos"]["beneficio_mais_vantajoso"] != beneficio_mais_vantajoso:
-                        st.session_state["dados_basicos"]["beneficio_mais_vantajoso"] = beneficio_mais_vantajoso
+                        if st.session_state["dados_basicos"]["beneficio_mais_vantajoso"] != beneficio_mais_vantajoso:
+                            st.session_state["dados_basicos"]["beneficio_mais_vantajoso"] = beneficio_mais_vantajoso
                     
                     beneficio_info = (f"{beneficio_revisado_string.lower()} (NB {NB})"if tipo_de_pedido == "revisão" else f"{beneficio_pedido_string.lower()}")
                     if resultado == "Improcedente": 
