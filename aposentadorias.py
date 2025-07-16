@@ -634,14 +634,17 @@ if uploaded_file:
                                 f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {tipo_de_pedido} de {beneficio_info}."
                                 ]
                     else: 
-                        dispositivo = [
-                                f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {tipo_de_pedido} de {beneficio_info} JULGO {resultado.upper()} para determinar a {tipo_de_pedido} e consequente implantação do benefício de {beneficio_mais_vantajoso}, na forma apurada nesta sentença. Fixo a DIB em {DER}. RMI e RMA a serem calculadas pelo INSS. NB a ser definido pelo INSS",
-                                f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.",
-                                f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis.",
-                                f"Condeno o INSS ao ressarcimento de eventuais honorários periciais antecipados pela Justiça Federal nesta lide (art. 82, § 2º, do CPC).",
-                                f"Considerando que o momento da prolação de sentença é oportuno para distribuir o ônus do tempo do processo, com vistas a salvaguardar a eficácia do princípio constitucional da razoável duração do processo e ao mesmo tempo privilegiar o direito provável em detrimento do improvável, demonstrada a verossimilhança das alegações da parte autora e diante do nítido caráter alimentar da verba pleiteada, nos termos do art. 294 e 300, do CPC ANTECIPA A TUTELA JURISDICIONAL para determinar ao INSS que providencie a implantação da {beneficio_mais_vantajoso} na forma concedida, com data de início de pagamento em {DIP} (DIP).",
-                                f"O INSS deverá providenciar a implantação do benefício previdenciário ora concedido no prazo legal, sendo a contagem em dias úteis, sendo que constitui ônus das partes informar ao Juízo sobre a efetiva implantação do benefício ou eventual descumprimento do prazo pelo INSS/APSADJ."
-                                ]
+                        if beneficio_mais_vantajoso:
+                            dispositivo = [
+                                    f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {tipo_de_pedido} de {beneficio_info} JULGO {resultado.upper()} para determinar a {tipo_de_pedido} e consequente implantação do benefício de {beneficio_mais_vantajoso}, na forma apurada nesta sentença. Fixo a DIB em {DER}. RMI e RMA a serem calculadas pelo INSS. NB a ser definido pelo INSS",
+                                    f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.",
+                                    f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis.",
+                                    f"Condeno o INSS ao ressarcimento de eventuais honorários periciais antecipados pela Justiça Federal nesta lide (art. 82, § 2º, do CPC).",
+                                    f"Considerando que o momento da prolação de sentença é oportuno para distribuir o ônus do tempo do processo, com vistas a salvaguardar a eficácia do princípio constitucional da razoável duração do processo e ao mesmo tempo privilegiar o direito provável em detrimento do improvável, demonstrada a verossimilhança das alegações da parte autora e diante do nítido caráter alimentar da verba pleiteada, nos termos do art. 294 e 300, do CPC ANTECIPA A TUTELA JURISDICIONAL para determinar ao INSS que providencie a implantação da {beneficio_mais_vantajoso} na forma concedida, com data de início de pagamento em {DIP} (DIP).",
+                                    f"O INSS deverá providenciar a implantação do benefício previdenciário ora concedido no prazo legal, sendo a contagem em dias úteis, sendo que constitui ônus das partes informar ao Juízo sobre a efetiva implantação do benefício ou eventual descumprimento do prazo pelo INSS/APSADJ."
+                                    ]
+                        else:
+                            dipositivo = []
                             
                     if st.session_state["dados_basicos"]["dispositivo"] != dispositivo:
                         st.session_state["dados_basicos"]["dispositivo"] = dispositivo
