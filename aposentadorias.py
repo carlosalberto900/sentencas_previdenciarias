@@ -6,6 +6,7 @@ from datetime import datetime
 from docx import Document
 from docx.shared import Cm
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+import funcoes_texto as ft
 
 # Função auxiliar para formatar dias em anos/meses/dias
 def formatar_dias_em_anos_meses_dias(dias: int) -> str:
