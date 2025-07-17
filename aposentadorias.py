@@ -8,6 +8,26 @@ from docx.shared import Cm
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 import funcoes_texto as ft
 
+
+# Função para criar texto_base
+def texto_base(doc, fundamento_questao):
+    if fundamento_questao == 1:
+        for i, paragrafo in enumerate(fundamento_base):
+            parag = doc.add_paragraph(paragrafo)
+            parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY 
+            # if i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 25, 26, 27, 28, 31, 33, 59]:
+            #     parag.paragraph_format.first_line_indent = Cm(2) 
+            # elif i in [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 29, 30, 32, 34, 35, 36, 37, 38 ,39, 40 ,41, 42, 43, 44, 45, 46, 47 ,48 ,49, 50 ,51, 52, 53, 54, 55, 56, 57, 58]:
+            #     parag.paragraph_format.left_indent = Cm(2)
+            parag.paragraph_format.first_line_indent = Cm(2)
+
+    if fundamento_questao == 2:
+        for linha in fundamento_custom.split("\n"):
+            if linha.split():
+                parag = doc.add_paragraph(linha.strip())
+                parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                parag.paragraph_format.first_line_indent = Cm(2)
+
 # Função auxiliar para formatar dias em anos/meses/dias
 def formatar_dias_em_anos_meses_dias(dias: int) -> str:
     anos = dias // 360
