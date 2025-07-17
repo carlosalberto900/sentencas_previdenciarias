@@ -752,22 +752,22 @@ if uploaded_file:
                             opcoes_beneficios = ["Não é possível definir o melhor benefício neste momento (escolha deve ficar a cargo das partes, apurada em liquidação)"]
                             for i, b in enumerate(cumpridos):
                                 if b.get("dadosApuracao", {}).get("temDireito"):
-                                    aposentadoria = f"{b.get('descricao')} com fundamento na {b.get('fundamento')}".lower()
+                                    aposentadoria = f"{b.get('descricao')} com fundamento na {b.get('fundamento')}"
                                     opcoes_beneficios.append(aposentadoria)
                             qual_beneficio_mais_vantajoso = str(st.radio("Qual destes é o benefício mais vantajoso, para ser deferido?", opcoes_beneficios, key=f"beneficio_mais_vantajoso{i}"))
                             if qual_beneficio_mais_vantajoso == opcoes_beneficios[0]:                            
                                 lista_melhor_beneficio = "aposentadoria mais vantajoso entre "
                                 for id, paragrafo in enumerate(cumpridos, start=1):
-                                    lista_melhor_beneficio += f"- {id}: {paragrafo.get('descricao')} com fundamento na {paragrafo.get('fundamento')} ".lower()
+                                    lista_melhor_beneficio += f"- {id}: {paragrafo.get('descricao')} com fundamento na {paragrafo.get('fundamento')} "
                                 beneficio_mais_vantajoso = f"{lista_melhor_beneficio}- a ser definido pelo INSS quando da implantação"
 
                             else:
-                                beneficio_mais_vantajoso = f"{qual_beneficio_mais_vantajoso}, que se mostra o benefício mais vantajoso".lower() 
+                                beneficio_mais_vantajoso = f"{qual_beneficio_mais_vantajoso}, que se mostra o benefício mais vantajoso" 
                         else:
                             for i, b in enumerate(cumpridos):
                                 if b.get("dadosApuracao", {}).get("temDireito"):
                                     aposentadoria = f"{b.get('descricao')} com fundamento na {b.get('fundamento')}"
-                                    beneficio_mais_vantajoso = aposentadoria.lower()
+                                    beneficio_mais_vantajoso = aposentadoria
                     else:
                         beneficio_mais_vantajoso = ""
 
