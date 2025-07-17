@@ -1033,6 +1033,8 @@ if uploaded_file:
                 st.markdown("\n\n".join(texto_fundamentacao_sentenca))
                 st.markdown("\n\n".join(dispositivo))
 
+
+            sentenca_finalizada = 
         else:
             st.error(f"Erro {response.status_code}: {response.text}")
 
