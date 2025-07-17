@@ -13,9 +13,9 @@ def texto_base(doc, fundamento_questao):
         for i, paragrafo in enumerate(fundamento_base):
             parag = doc.add_paragraph(paragrafo)
             parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY 
-            if i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 18, 21, 24, 27, 31]:
+            if i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16, 20, 23, 26, 29, 33]:
                 parag.paragraph_format.first_line_indent = Cm(2) 
-            elif i in [11, 12, 13, 15, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 30]:
+            elif i in [13, 14, 15, 17, 18, 19, 21, 22, 24, 25, 27, 28, 30, 31, 32]:
                 parag.paragraph_format.left_indent = Cm(2)
     if fundamento_questao == 2:
         for linha in fundamento_custom.split("\n"):
