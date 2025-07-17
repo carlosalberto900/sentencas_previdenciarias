@@ -13,9 +13,9 @@ def texto_base(doc, fundamento_questao):
         for i, paragrafo in enumerate(fundamento_base):
             parag = doc.add_paragraph(paragrafo)
             parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY 
-            if i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 25, 27, 30, 32, 33, 35, 36, 37, 39, 41, 42, 44, 46, 48]:
+            if i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 26, 27, 29, 32, 34, 35, 37, 38, 39, 41, 43, 44, 46, 48, 50]:
                 parag.paragraph_format.first_line_indent = Cm(2) 
-            elif i in [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 26, 28, 29, 31, 34, 38, 40, 43, 45, 47]:
+            elif i in [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 28, 30, 31, 33, 36, 40, 42, 45, 47, 49]:
                 parag.paragraph_format.left_indent = Cm(2)
     if fundamento_questao == 2:
         for linha in fundamento_custom.split("\n"):
@@ -39,7 +39,9 @@ if fundamento_questao == 1:
                 "Dispensado o relatório nos termos do art. 38 da Lei n. 9.099/95.",
                 "DECIDO.",
                 "O feito comporta julgamento imediato.",
-                "O Juízo é competente porque o valor da causa está abaixo de 60 salários-mínimos. Não há que se falar em renúncia a valores excedentes, neste caso, justamente porque o valor da causa já foi fixado na alçada do JEF. O tema 1030 do STJ prevê que: “Ao autor que deseje litigar no âmbito de Juizado Especial Federal Cível, é lícito renunciar, de modo expresso e para fins de atribuição de valor à causa, ao montante que exceda os 60 (sessenta) salários mínimos previstos no art. 3º, caput, da Lei 10.259/2001, aí incluídas, sendo o caso, até doze prestações vincendas, nos termos do art. 3º, § 2º, da referida lei, c/c o art. 292, §§ 1º e 2º, do CPC/2015.” Logo, a renúncia só tem sentido nos casos em que o valor da causa, apurado sem qualquer renúncia, pudesse ser superior à alçada, pois nesta hipótese a renúncia daria ensejo à parte litigar sob a competência do Juizado. Não é o caso dos autos, onde o valor da causa apontado já está abaixo da alçada, e a parte ré não aponta erro na sua apuração.",
+                "O Juízo é competente porque o valor da causa está abaixo de 60 salários-mínimos. Não há que se falar em renúncia a valores excedentes, neste caso, justamente porque o valor da causa já foi fixado na alçada do JEF.", 
+                "O tema 1030 do STJ prevê que: “Ao autor que deseje litigar no âmbito de Juizado Especial Federal Cível, é lícito renunciar, de modo expresso e para fins de atribuição de valor à causa, ao montante que exceda os 60 (sessenta) salários mínimos previstos no art. 3º, caput, da Lei 10.259/2001, aí incluídas, sendo o caso, até doze prestações vincendas, nos termos do art. 3º, § 2º, da referida lei, c/c o art. 292, §§ 1º e 2º, do CPC/2015.” ", 
+                "Logo, a renúncia só tem sentido nos casos em que o valor da causa, apurado sem qualquer renúncia, pudesse ser superior à alçada, pois nesta hipótese a renúncia daria ensejo à parte litigar sob a competência do Juizado. Não é o caso dos autos, onde o valor da causa apontado já está abaixo da alçada, e a parte ré não aponta erro na sua apuração.",
                 "Partes legítimas. Passo ao mérito.",
                 "Não há prescrição de fundo de direito, mas apenas das parcelas vencidas, na forma da súmula 85 do STJ. Estão prescritas eventuais parcelas anteriores ao quinquênio que precede a propositura da ação.",
                 "Passo a analisar o pedido da parte autora.",
