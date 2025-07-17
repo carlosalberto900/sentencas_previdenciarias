@@ -1058,8 +1058,6 @@ if uploaded_file:
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base(doc, fundamento_questao)
-                texto_fundamentacao_sentença
-                dispositivo
                 ft.alinhamento_parag_dispositivo(doc, texto_fundamentacao_sentenca)
                 ft.alinhamento_parag_dispositivo(doc, dispositivo)
                 ft.salvar_docx_temporario(doc, processo_formatado)              
