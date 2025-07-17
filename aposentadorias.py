@@ -967,7 +967,7 @@ if uploaded_file:
                 if paragrafos_sobre_dados_basicos.get("redacao"):
                     texto_fundamentacao_sentenca.extend(paragrafos_sobre_dados_basicos.get("redacao"))
                 if paragrafos_sobre_tempo.get("demonstrativo_cada_vinculo"):
-                    texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO EM CADA VÍNCULOS:")
+                    texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO EM CADA VÍNCULO:")
                     texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_cada_vinculo"])
                 if paragrafos_sobre_tempo.get("demonstrativo_tempo_total_magisterio"):
                     texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO NO MAGISTÉRIO:")
@@ -986,8 +986,6 @@ if uploaded_file:
                 if beneficios_cumpridos:
                     texto_fundamentacao_sentenca.append("APOSENTADORIAS COM REQUISITOS CUMPRIDOS:")
                     texto_fundamentacao_sentenca.extend(beneficios_cumpridos)
-                    if st.session_state["dados_basicos"]["beneficio_mais_vantajoso"] != "":
-                        texto_fundamentacao_sentenca.append(f"Dentre as opções, o benefício de {paragrafos_sobre_dados_basicos.get("beneficio_mais_vantajoso")} deve ser deferido, por se mostrar o mais vantajoso.")     
 
                 # 2. Inicia lista que armazenará dispositivo
                 dispositivo = []
