@@ -460,6 +460,7 @@ if uploaded_file:
                             st.rerun()
 
             with abas[2]:
+                st.write("Se desejar utilizar algum trecho, basta copiar aqui e colar no campo em que pretende usar.")
                 for agente, explicacoes in agnocivo.agentes_nocivos.items():
                     st.markdown(f"🧪 **{agente}**")
                     for item in explicacoes:
