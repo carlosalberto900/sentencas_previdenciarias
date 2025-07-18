@@ -462,10 +462,10 @@ if uploaded_file:
             with abas[2]:
                 st.write("Se desejar utilizar algum trecho, basta copiar aqui e colar no campo em que pretende usar.")
                 for agente, explicacoes in agnocivo.agentes_nocivos.items():
+                    st.divider()
                     st.markdown(f"🧪 **{agente}**")
                     for item in explicacoes:
                         st.markdown(f"{item}")
-                        st.divider()
 
             # Junta os períodos da API + manuais para análise/sentença
             periodos_para_sentenca = st.session_state["periodos_da_api"] + st.session_state["periodos_manuais"]
