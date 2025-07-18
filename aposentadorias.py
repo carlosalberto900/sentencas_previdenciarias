@@ -939,7 +939,7 @@ if uploaded_file:
                                         st.session_state["analise_paragrafos"]["analise_API_beneficios_nao_cumpridos"].append(texto_analise_API_beneficios_nao_cumpridos)
                                     st.markdown(texto_analise_API_beneficios_nao_cumpridos)
 
-                with abas[2]:
+                with abas2[2]:
                     for agente, explicacoes in agnocivo.agentes_nocivos.items():
                         st.markdown(f"🧪 **{agente}**")
                         for item in explicacoes:
