@@ -400,7 +400,7 @@ if uploaded_file:
             if "periodos_da_api" not in st.session_state:
                 st.session_state["periodos_da_api"] = []
 
-            abas = st.tabs(["🗂 Escolha dos Períodos existentes na Fábrica de Cálculos", "✏️ Inserção manual de período"])
+            abas = st.tabs(["🗂 Escolha dos Períodos existentes na Fábrica de Cálculos", "✏️ Inserção manual de período", "☢️ Exemplos de redações para Agentes Nocivos"])
 
             with abas[0]:
                 # Multiselect para seleção dos períodos analisados
@@ -458,6 +458,12 @@ if uploaded_file:
                         # Permite inserir outro
                         if st.button("Inserir outro período"):
                             st.rerun()
+
+            with abas[2]:
+                for agente, explicacoes in agnocivo.agentes_nocivos.items():
+                    st.markdown(f"🧪 **{agente}**")
+                    for item in explicacoes:
+                        st.markdown(f"{item}")
 
             # Junta os períodos da API + manuais para análise/sentença
             periodos_para_sentenca = st.session_state["periodos_da_api"] + st.session_state["periodos_manuais"]
@@ -674,7 +680,7 @@ if uploaded_file:
 
             if sentenca_merito == True:
 
-                abas2 = st.tabs(["✏️ Dados Básicos","📈 Resultado da Análise da Fábrica de Dados", "☢️ Exemplos de redações para Agentes Nocivos"])
+                abas2 = st.tabs(["✏️ Dados Básicos","📈 Resultado da Análise da Fábrica de Dados"])
 
                 # Inicializa DADOS BÁSICOS que acaba criando "paragrafos_sobre_dados_basicos"
                 with abas2[0]:
@@ -939,11 +945,6 @@ if uploaded_file:
                                         st.session_state["analise_paragrafos"]["analise_API_beneficios_nao_cumpridos"].append(texto_analise_API_beneficios_nao_cumpridos)
                                     st.markdown(texto_analise_API_beneficios_nao_cumpridos)
 
-                with abas2[2]:
-                    for agente, explicacoes in agnocivo.agentes_nocivos.items():
-                        st.markdown(f"🧪 **{agente}**")
-                        for item in explicacoes:
-                            st.markdown(f"{item}")
 
                # EXIBIR OS ARQUIVOS PRODUZIDOS
                 # with st.expander("🔍 Ver arquivos produzidos"):
