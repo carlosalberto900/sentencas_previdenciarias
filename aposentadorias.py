@@ -464,7 +464,7 @@ if uploaded_file:
 
             # LÓGICA DE APRECIAÇÃO DE CADA PERÍODO
             if periodos_para_sentenca:
-                abasx = ["🔍 Análise de cada período", "☢️ Exemplos de redações para Agentes Nocivos"]
+                abasx = st.tabs["🔍 Análise de cada período", "☢️ Exemplos de redações para Agentes Nocivos"]
                 with abasx[0]:
                     st.subheader("🔍 Análise de cada período")
                     st.write("Cada período deverá ser analisado separadamente, dentro de cada pasta abaixo.")
