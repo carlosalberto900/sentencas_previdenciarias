@@ -7,6 +7,7 @@ from docx import Document
 from docx.shared import Cm
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 import funcoes_texto as ft
+import agentes_nocivos as agnocivo
 
 
 # Função para criar texto_base
@@ -673,7 +674,7 @@ if uploaded_file:
 
             if sentenca_merito == True:
 
-                abas2 = st.tabs(["✏️ Dados Básicos","📈 Resultado da Análise da Fábrica de Dados"])
+                abas2 = st.tabs(["✏️ Dados Básicos","📈 Resultado da Análise da Fábrica de Dados", "☢️ Exemplos de redações para Agentes Nocivos"])
 
                 # Inicializa DADOS BÁSICOS que acaba criando "paragrafos_sobre_dados_basicos"
                 with abas2[0]:
@@ -938,7 +939,11 @@ if uploaded_file:
                                         st.session_state["analise_paragrafos"]["analise_API_beneficios_nao_cumpridos"].append(texto_analise_API_beneficios_nao_cumpridos)
                                     st.markdown(texto_analise_API_beneficios_nao_cumpridos)
 
-
+                with abas[2]:
+                    for agente, explicacoes in agnocivo.agentes_nocivos.items():
+                        st.markdown(f"🧪 **{agente}**")
+                        for item in explicacoes:
+                            st.markdown(f"{item}")
 
                # EXIBIR OS ARQUIVOS PRODUZIDOS
                 # with st.expander("🔍 Ver arquivos produzidos"):
