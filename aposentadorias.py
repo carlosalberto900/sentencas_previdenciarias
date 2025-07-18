@@ -465,6 +465,7 @@ if uploaded_file:
                     st.markdown(f"🧪 **{agente}**")
                     for item in explicacoes:
                         st.markdown(f"{item}")
+                        st.divider()
 
             # Junta os períodos da API + manuais para análise/sentença
             periodos_para_sentenca = st.session_state["periodos_da_api"] + st.session_state["periodos_manuais"]
