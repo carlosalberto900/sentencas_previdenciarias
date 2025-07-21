@@ -636,8 +636,6 @@ if resultado == 1:
 
     if dependente_opcoes == 1:
         data_casamento = st.text_input("Qual a data do casamento? Escreva no formato DD/MM/AAAA")
-    # if dependente_opcoes in [12, 13]:
-    #     pensao_prazo = 
     if dependente_opcoes in [3, 7, 8, 11, 14]:
         data_nascimento = st.text_input("Qual a data de nascimento do(a) dependente? Escreva no formato DD/MM/AAAA")
         data_aniversario = st.text_input("Qual a data em que o(a) dependente completará 21 anos de idade? Escreva no formato DD/MM/AAAA")
