@@ -640,6 +640,9 @@ if resultado == 1:
         data_nascimento = st.text_input("Qual a data de nascimento do(a) dependente? Escreva no formato DD/MM/AAAA")
         data_aniversario = st.text_input("Qual a data em que o(a) dependente completará 21 anos de idade? Escreva no formato DD/MM/AAAA")
         pensao_prazo = (f"até completar 21 anos de idade em {data_aniversario}")
+    if dependente_opcoes in [12 ,13]:
+        tempo = "de forma vitalícia"
+        pensao_prazo = tempo
     if dependente_opcoes in [4, 9, 10, 15]:
         pericia = st.text_area("O que a perícia médica constatou sobre invalidez, deficiência intelectual ou mental ou deficiência grave? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
         pensao_prazo = "enquanto permanecer inválido, deficiente intelectual ou mental, ou deficiente grave"    
