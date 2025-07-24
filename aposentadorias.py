@@ -526,7 +526,7 @@ if uploaded_file:
                                             especificar_conclusao_prova_material = st.radio(f"A sentença informará genericamente que: 'Considero suficiente o início de prova material apresentado nos autos autos'. Deseja apresentar outros esclarecimentos além disso, ou esta redação é suficiente?", [1,2], format_func=lambda x: "Esta redação é suficiente" if x == 1 else "Desejo apresentar esclarecimentos", key=f"especificar_conclusao_prova_material_{i}")
                                             if especificar_conclusao_prova_material == 1:
                                                 p["conclusao_prova_material"] = []
-                                            if especificar_conclusao_prova material == 2:
+                                            if especificar_conclusao_prova_material == 2:
                                                 p["conclusao_prova_material"] = [p.strip() for p in st.text_area(f"Explique porque você concluiu que os documentos apresentados são suficientes para início de prova material. Redija como um (ou mais) parágrafo(s) completo(s), iniciando com letra maiúscula, e encerrando com ponto final", key=f"conclusao_prova_material_{i}").split("\n") if p.strip()]
                                             testemunhal = st.radio(f"Houve prova testemunhal para este período?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"testemunhal_{i}")
                                             p["houve_prova_testemunhal"] = "Sim" if testemunhal == 1 else "Não"
