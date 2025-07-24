@@ -336,12 +336,13 @@ if uploaded_file:
             with st.expander("📖 Instruções ao usuário"):
                 st.markdown(f"""**Toda a lógica do Aplicativo é justificar as escolhas que você fez na hora que elaborou o cálculo na "Fábrica de Cálculos"**.
                             \nOs vínculos são apresentados **conforme foram inseridos na "Fábrica de Cálculos"**.
-                            \nPor este motivo, há casos em que o período foi recortado, ou seja, o pedido da parte refere-se a um período maior, mas somente foi reconhecida parte da pretensão.
+                            \nPor este motivo, há casos em que o período foi recortado. O recorte ocorre porque o vínculo refere-se a um período maior, mas somente foi reconhecida parte da pretensão, ou, então, porque a "Fábrica de Cálculos" o recorta automaticamente, nos marcos da Lei 9.876/99, EC 103/19, por exemplo.
                             \nNestes casos, selecione apenas a parte do vínculo recortada, que vai corresponder ao período que você vai reconhecer. Você será chamado a especificar, posteriormente, que se trata de parte de um período controvertido maior, e que somente esta parte será deferida, e o restante do pedido não, de modo que a redação da sentença sairá ajustada.
+                            \nSe preferir, nos casos em que há vários recortes do mesmo período, você pode inseri-lo manualmente. O valor inserido manualmente será o que período apreciado. Se você preferir analisar parte de um período dentro de um período maior, você será chamado a especificar o período maior.
                             \nO mesmo ocorre em relação ao reconhecimento de deficiência. Somente será exibido o período que foi deferido, embora a controvérsia possa abranger período maior. Você será chamado a especificar.
                             \nNeste lógica, você perceberá que os pedidos de reconhecimento de tempo (urbano ou rural, especial ou comum) que serão julgados **totalmente improcedentes**, não estão listados.
                             \nIsso ocorre porque você não os inseriu no "Fábrica de Cálculos" (corretamente, porque serão improcedentes no total). Contudo, estes períodos devem compor a fundamentação da sentença.
-                            \nNestes casos, como os períodos não constam, sequer em parte, no cálculo advindo da "Fábrica de Cálculos", eles devem ser inseridos manualmente abaixo.
+                            \nComo os períodos não constam, sequer em parte, no cálculo advindo da "Fábrica de Cálculos", eles devem ser inseridos manualmente abaixo.
                             \nIgualmente, se a parte alegou ter trabalhado como DEFICIENTE, e isso não será reconhecido pela sentença em nenhum grau, o período respectivo também deve ser inserido manualmente.""")
 
             # Adiciona períodos da API nas estruturas de estado
@@ -419,7 +420,7 @@ if uploaded_file:
                                     format_func=lambda x: "Tempo de serviço" if x == 1 else "Deficiência", key=f"tipo_{id_contador}")
                     if tipo == 1:
                         origem_dado = "controvertido_sem_deficiencia"
-                        vinculo_inserido = st.text_input("Descrição do vínculo (empregador / contribuinte / etc.)", key=f"vinculo_inserido_{id_contador}")
+                        # vinculo_inserido = st.text_input("Descrição do vínculo (empregador / contribuinte / etc.)", key=f"vinculo_inserido_{id_contador}")
                         data_inicio_inserido = st.text_input("Data inicial (dd/mm/aaaa)", key=f"data_inicio_inserido_{id_contador}")
                         data_fim_inserido = st.text_input("Data final (dd/mm/aaaa)", key=f"data_fim_inserido_{id_contador}")
                     else:
@@ -522,7 +523,11 @@ if uploaded_file:
                                                                     ]
                                    
                                         if inicio_prova_material_apresentado == 1:
-                                            p["conclusao_prova_material"] = [p.strip() for p in st.text_area(f"Explique porque você concluiu que os documentos apresentados são suficientes para início de prova material. Redija como um (ou mais) parágrafo(s) completo(s), iniciando com letra maiúscula, e encerrando com ponto final", key=f"conclusao_prova_material_{i}").split("\n") if p.strip()]
+                                            especificar_conclusao_prova_material = st.radio(f"A sentença informará genericamente que: 'Considero suficiente o início de prova material apresentado nos autos autos'. Deseja apresentar outros esclarecimentos além disso, ou esta redação é suficiente?", [1,2], format_func=lambda x: "Esta redação é suficiente" if x == 1 else "Desejo apresentar esclarecimentos", key=f"especificar_conclusao_prova_material_{i}")
+                                            if especificar_conclusao_prova_material == 1:
+                                                p["conclusao_prova_material"] = []
+                                            if especificar_conclusao_prova material == 2:
+                                                p["conclusao_prova_material"] = [p.strip() for p in st.text_area(f"Explique porque você concluiu que os documentos apresentados são suficientes para início de prova material. Redija como um (ou mais) parágrafo(s) completo(s), iniciando com letra maiúscula, e encerrando com ponto final", key=f"conclusao_prova_material_{i}").split("\n") if p.strip()]
                                             testemunhal = st.radio(f"Houve prova testemunhal para este período?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"testemunhal_{i}")
                                             p["houve_prova_testemunhal"] = "Sim" if testemunhal == 1 else "Não"
     
@@ -547,10 +552,11 @@ if uploaded_file:
                                                     p["texto_final_periodos"] = [
                                                                                 f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                                 f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{"\n".join(p["documento_prova_material"])} {"\n".join(p["conclusao_prova_material"])}",
-                                                                                f"Houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{"\n".join(p["depoimento"])}", 
-                                                                                f"{"\n".join(p["conclusao_depoimento"])}"
+                                                                                f"{p['documento_prova_material']}",
+                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
+                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
+                                                                                f"{p['depoimento']}", 
+                                                                                f"{p['conclusao_depoimento']}"
                                                                                 ]
     
                                                 if o_que_parte_pede == 2:
@@ -562,10 +568,11 @@ if uploaded_file:
                                                         p["texto_final_periodos"] = [
                                                                                 f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                                 f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{"\n".join(p["documento_prova_material"])} {"\n".join(p["conclusao_prova_material"])}",
-                                                                                f"Houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{"\n".join(p["depoimento"])}", 
-                                                                                f"{"\n".join(p["conclusao_depoimento"])}",
+                                                                                f"{p['documento_prova_material']}",
+                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
+                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
+                                                                                f"{p['depoimento']}", 
+                                                                                f"{p['conclusao_depoimento']}",
                                                                                 f"A parte autora não comprovou o alegado, e, por isso, seu pedido de reconhecimento do período em questão deve ser improcedente"
                                                                                 ]
                                                     if sera_reconhecido == 1:
@@ -573,16 +580,17 @@ if uploaded_file:
                                                         p["conclusao_especial_ou_comum"] = [p.strip() for p in st.text_area(f"Redija porque chegou nesta conclusão, com base nas provas. Inicie com letra maiúscula e encerre com ponto final.", key=f"conclusao_comum_especial{i}").split("\n") if p.strip()]
                                                         p["tipo_tempo"] = "comum" if sera_reconhecido_comum_especial == 1 else "especial"
                                                         p["resultado"] = "Procedente" if sera_reconhecido_comum_especial == 2 and periodo_maior == 2 else "Procedente em parte"
-                                                        p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido " + (f"e declaro o período entre {p['data_inicio']} até {p['data_fim']} como {p['tipo_tempo']}, determinando sua averbação." if p["tipo_tempo"] == "comum" else f"e declaro o período entre {p['data_inicio']} até {p['data_fim']}, como {p['tipo_tempo']}, sujeito a conversão, determinando sua averbação." if p["tipo_tempo"] == "especial" else "")
+                                                        p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido " + (f"e declaro o período entre {p['data_inicio']} até {p['data_fim']} como tempo {p['tipo_tempo']}, determinando sua averbação." if p["tipo_tempo"] == "comum" else f"e declaro o período entre {p['data_inicio']} até {p['data_fim']}, como tempo {p['tipo_tempo']}, sujeito a conversão, determinando sua averbação." if p["tipo_tempo"] == "especial" else "")
                                                         p["texto_final_periodos"] = [
                                                                                     f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                                     f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                    f"{"\n".join(p["documento_prova_material"])} {"\n".join(p["conclusao_prova_material"])}",
-                                                                                    f"Houve oitiva de testemunha(s) em Juízo:",
-                                                                                    f"{"\n".join(p["depoimento"])}", 
-                                                                                    f"{"\n".join(p["conclusao_depoimento"])}",
+                                                                                    f"{p['documento_prova_material']}",
+                                                                                    f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
+                                                                                    f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
+                                                                                    f"{p['depoimento']}", 
+                                                                                    f"{p['conclusao_depoimento']}"
                                                                                     f"Passo a analisar a alegação de que o tempo de trabalho é tempo especial.",
-                                                                                    f"{"\n".join(p["conclusao_especial_ou_comum"])}",
+                                                                                    f"{p['conclusao_especial_ou_comum']}"
                                                                                     ]
     
                                                 if o_que_parte_pede == 3:
@@ -594,10 +602,11 @@ if uploaded_file:
                                                         p["texto_final_periodos"] = [
                                                                                 f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                                 f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{"\n".join(p["documento_prova_material"])} {"\n".join(p["conclusao_prova_material"])}",
-                                                                                f"Houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{"\n".join(p["depoimento"])}", 
-                                                                                f"{"\n".join(p["conclusao_depoimento"])}",
+                                                                                f"{p['documento_prova_material']}",
+                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
+                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
+                                                                                f"{p['depoimento']}", 
+                                                                                f"{p['conclusao_depoimento']}",
                                                                                 f"A parte autora não comprovou o alegado, e, por isso, seu pedido de reconhecimento do período em questão deve ser improcedente."
                                                                                 ]
     
@@ -608,10 +617,11 @@ if uploaded_file:
                                                         p["texto_final_periodos"] = [
                                                                                 f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                                 f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{"\n".join(p["documento_prova_material"])} {"\n".join(p["conclusao_prova_material"])}",
-                                                                                f"Houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{"\n".join(p["depoimento"])}", 
-                                                                                f"{"\n".join(p["conclusao_depoimento"])}"
+                                                                                f"{p['documento_prova_material']}",
+                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
+                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
+                                                                                f"{p['depoimento']}", 
+                                                                                f"{p['conclusao_depoimento']}"
                                                                                     ]                         
     
     
@@ -622,7 +632,7 @@ if uploaded_file:
                                     p["conclusao_especial_ou_comum"] = [p.strip() for p in st.text_area(f"Redija porque chegou nesta conclusão, com base nas provas. Inicie com letra maiúscula e encerre com ponto final.", key=f"conclusao_comum_especial{i}").split("\n") if p.strip()]
                                     p["tipo_tempo"] = "comum" if sera_reconhecido == 1 else "especial"
                                     p["resultado"] = "Procedente" if sera_reconhecido == 2 and periodo_maior == 2 else "Procedente em parte" if sera_reconhecido == 2 and periodo_maior == 1 else "Improcedente"
-                                    p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}." if p.get("resultado" == "Improcedente") else f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido, e declaro o tempo como especial, determinando sua averbação."
+                                    p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}." if p.get("resultado") == "Improcedente" else f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido, e declaro o período entre {p["data_inicio"]} até {p["data_fim"]} como tempo especial, determinando sua averbação."
                                     p["texto_final_periodos"] = [
                                                                 f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                 f"A parte autora alega que o período laborado entre {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}, é tempo especial.",
