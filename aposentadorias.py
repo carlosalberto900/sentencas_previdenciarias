@@ -311,7 +311,7 @@ if uploaded_file:
 
     payload = parse_calc_format(payload)
     payload_final = montar_payload_final(payload)
-    st.json(payload_final, expanded=False)
+    #st.json(payload_final, expanded=False)
 
     # Envio e tratamento da resposta
     if payload_final:
@@ -323,7 +323,7 @@ if uploaded_file:
             st.success("Resposta recebida com sucesso!")
             resposta = response.json()
             st.session_state["resposta"] = resposta
-            # st.json(resposta, expanded=False)
+            st.json(resposta, expanded=False)
 
             # ESCOLHA DOS VINCULOS QUE SERÃO ANALISADOS
             # Inicializa estruturas de estado
