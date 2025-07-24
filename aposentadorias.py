@@ -636,7 +636,7 @@ if uploaded_file:
                                     p["texto_final_periodos"] = [
                                                                 f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
                                                                 f"A parte autora alega que o período laborado entre {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}, é tempo especial.",
-                                                                f"{"\n".join(p["conclusao_especial_ou_comum"])}"
+                                                                f"{p['conclusao_especial_ou_comum']}"
                                                                 ]
     
                             if p["origem_do_dado"] == "controvertido_deficiencia":
