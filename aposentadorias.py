@@ -516,7 +516,7 @@ if uploaded_file:
                                         if o_que_parte_pede == 1:
                                             p["tipo_tempo"] = "comum" 
                                             p["resultado"] = "Procedente" if periodo_maior == 2 else "Procedente em parte" 
-                                            p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido e declaro o periodo de {p['data_inicio']} a {p['data_fim']} como tempo comum, determinando sua averbação.")                                                                                
+                                            p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido e declaro o periodo de {p['data_inicio']} a {p['data_fim']} como tempo comum, determinando sua averbação."                                                                                
     
                                         if o_que_parte_pede == 2:
                                             sera_reconhecido_comum_especial = st.radio(f"Dentro do período de {p['data_inicio_maior']} até {p['data_fim_maior']}, a sentença reconhecerá o período de {p['data_inicio']} ate {p['data_fim']} como tempo comum ou tempo especial?", [1, 2], format_func=lambda x: "Comum" if x == 1 else "Especial", key=f"sera_reconhecido_comum_especial_{i}")
