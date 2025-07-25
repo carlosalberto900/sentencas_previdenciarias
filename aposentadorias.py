@@ -548,7 +548,7 @@ if uploaded_file:
                                                 p["texto_final_periodos"].append(f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.")
                                                 p["texto_final_periodos"].extend(p['documento_prova_material'])
                                                 p["texto_final_periodos"].extend([f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material'][0]}"] + p["conclusao_prova_material"][1:] if p["conclusao_prova_material"] else ["Considero suficiente o início de prova material apresentado nos autos autos."])
-                                                p["texto_final_periodos"].extend(f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:")
+                                                p["texto_final_periodos"].append(f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:")
                                                 p["texto_final_periodos"].extend(p['depoimento'])
                                                 p["texto_final_periodos"].extend(p['conclusao_depoimento'])
                                                 
