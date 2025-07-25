@@ -617,11 +617,11 @@ if uploaded_file:
                                     p["data_fim_maior"] = p["data_fim"]
                                 deficiente_procedente_improcedente = st.radio("Será reconhecida a deficiência?", [1,2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"deficiente_procedente_improcedente_{i}", index=1)
                                 p["conclusao_depoimento"] = [p.strip() for p in st.text_area(f"Redija porque chegou nesta conclusão. No caso da resposta ter sido pelo reconhecimento da deficiência, no todo ou em parte, e em qualquer grau, a explicação deve justificar a existência da deficiência, o grau reconhecido e o período reconhecido. Inicie com letra maiúscula e encerre com ponto final.", key=f"conclusao_depoimento_{i}").split("\n") if p.strip()]    
-                                p["texto_final_periodos"] = [
-                                                                    f"DA ALEGADA DEFICIÊNCIA EM GRAU {p["o_que_parte_pede"].upper()} ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]}:"
-                                                                    f"No que se refere ao período de {p["data_inicio_maior"]} até {p["data_fim_maior"]}, que parte alega ter realizado trabalho na condição de deficiente, foi realizada prova pericial para sua comprovação."
-                                                                    f"{p["conclusao_depoimento"]}"
-                                                                    ]
+                                p["texto_final_periodos"] = []
+                                p["texto_final_periodos"].append(f"DA ALEGADA DEFICIÊNCIA EM GRAU {p["o_que_parte_pede"].upper()} ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]}:")
+                                p["texto_final_periodos"].append(f"No que se refere ao período de {p["data_inicio_maior"]} até {p["data_fim_maior"]}, que parte alega ter realizado trabalho na condição de deficiente, foi realizada prova pericial para sua comprovação.")
+                                p["texto_final_periodos"].extend(p["conclusao_depoimento"])
+                                                                    
                                 if deficiente_procedente_improcedente == 1:                            
                                     o_que_parte_pede = st.radio(f"A sentença reconhecerá a deficiência como em grau {p["grau_deficiencia"]}. Para efeito de se verificar se a procedência é total ou parcial, o grau de deficiencia que parte pede para ser reconhecido:", [1,2,3], format_func=lambda x: "LEVE" if x == 1 else "MODERADO" if x == 2 else "GRAVE", key=f"o_que_parte_pede_{i}")
                                     p["o_que_parte_pede"] = {
