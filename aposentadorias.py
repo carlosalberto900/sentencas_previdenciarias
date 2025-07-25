@@ -1088,12 +1088,12 @@ if uploaded_file:
                 dispositivo.extend(desfecho_dispositivo)
 
                 
-            # 8. Exibição final
-            with st.expander("Redação Final da Sentença"):
-                # st.write(texto_fundamentacao_sentenca)
-                # st.write(dispositivo)
-                st.markdown("\n\n".join(texto_fundamentacao_sentenca))
-                st.markdown("\n\n".join(dispositivo))
+            # # 8. Exibição final
+            # with st.expander("Redação Final da Sentença"):
+            #     # st.write(texto_fundamentacao_sentenca)
+            #     # st.write(dispositivo)
+            #     st.markdown("\n\n".join(texto_fundamentacao_sentenca))
+            #     st.markdown("\n\n".join(dispositivo))
 
 
             if st.button("Gerar Sentença"):
