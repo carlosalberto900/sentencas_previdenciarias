@@ -1010,9 +1010,9 @@ if uploaded_file:
                 texto_fundamentacao_sentenca.append("SOBRE O BENEFÍCIO PLEITEADO:")
                 if paragrafos_sobre_dados_basicos.get("redacao"):
                     texto_fundamentacao_sentenca.extend(paragrafos_sobre_dados_basicos.get("redacao"))
-                if paragrafos_sobre_tempo.get("demonstrativo_cada_vinculo"):
-                    texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO EM CADA VÍNCULO:")
-                    texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_cada_vinculo"])
+                # if paragrafos_sobre_tempo.get("demonstrativo_cada_vinculo"):
+                #     texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO EM CADA VÍNCULO:")
+                #     texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_cada_vinculo"])
                 if paragrafos_sobre_tempo.get("demonstrativo_tempo_total_magisterio"):
                     texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO NO MAGISTÉRIO:")
                     texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total_magisterio"])
