@@ -57,7 +57,7 @@ def iso_to_br(date_str):
         return ""
 # Função para transformar data
 def corrigir_data_em_string(texto: str) -> str:
-    padrao = r"(\d{2})/(\d{2})/(\d{4})"
+    padrao = r"(\d{1,2})/(\d{1,2})/(\d{4})"
     def converter_para_br(match):
         mm, dd, aaaa = match.groups()
         try:
