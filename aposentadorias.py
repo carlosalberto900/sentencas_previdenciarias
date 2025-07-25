@@ -501,11 +501,11 @@ if uploaded_file:
                                         p["houve_prova_material"] = f"Não"
                                         p["resultado"] = f"Extinto sem julgamento de mérito - Tema 629 - Falta de início de prova material"
                                         p["dispositivo"] = f"Sem resolução de mérito, nos termos do art. 485, VI do CPC, JULGO EXTINTO o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}."
-                                        p["texto_final_periodos"] = [
-                                                                f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, sendo ônus da parte autora junta-lo aos autos. No caso, a parte não trouxe nenhum documento como prova material.", 
-                                                                f"Ausente início de prova material, inviável o acolhimento do pleito. Em que pese, em regra, a ausência de prova implique na improcedência do feito, a jurisprudência do STJ consolidou-se no sentido de que, nas demandas previdenciárias, a ausência de prova de tempo de contribuição deve resultar na extinção do feito sem resolução de mérito, por ausência de pressuposto processual, diante do caráter social que a lide envolve. Trata-se do Resp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, julgado em regime de recursos repetitivos (tema 629) - REsp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, CORTE ESPECIAL, julgado em 16/12/2015, DJe 28/04/2016."
-                                                                ]
+                                        p["texto_final_periodos"] = []
+                                        p["texto_final_periodos"].append(f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:")
+                                        p["texto_final_periodos"].append(f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, sendo ônus da parte autora junta-lo aos autos. No caso, a parte não trouxe nenhum documento como prova material.")
+                                        p["texto_final_periodos"].append(f"Ausente início de prova material, inviável o acolhimento do pleito. Em que pese, em regra, a ausência de prova implique na improcedência do feito, a jurisprudência do STJ consolidou-se no sentido de que, nas demandas previdenciárias, a ausência de prova de tempo de contribuição deve resultar na extinção do feito sem resolução de mérito, por ausência de pressuposto processual, diante do caráter social que a lide envolve. Trata-se do Resp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, julgado em regime de recursos repetitivos (tema 629) - REsp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, CORTE ESPECIAL, julgado em 16/12/2015, DJe 28/04/2016.")
+                                                    
     
                                     if precisa_prova == 1:
                                         p["houve_prova_material"] = "Sim"
@@ -515,12 +515,13 @@ if uploaded_file:
                                             p["conclusao_prova_material"] = [p.strip() for p in st.text_area(f"Explique o motivo pelo qual você concluiu que os documentos apresentados não são suficientes para início de prova material. Redija como um (ou mais) parágrafo(s) completo(s), iniciando com letra maiúscula, e encerrando com ponto final", key=f"conclusao_prova_material_{i}").split("\n") if p.strip()]
                                             p["resultado"] = f"Extinto sem julgamento de mérito - Tema 629 - Falta de início de prova material"
                                             p["dispositivo"] = f"Sem resolução de mérito, nos termos do art. 485, VI do CPC, JULGO EXTINTO o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}."
-                                            p["texto_final_periodos"] = [
-                                                                    f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                    f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, sendo ônus da parte autora junta-lo aos autos.",
-                                                                    f"{"\n".join(p["documento_prova_material"])} {"\n".join(p["conclusao_prova_material"])}", 
-                                                                    f"Ausente início de prova material, inviável o acolhimento do pleito. Em que pese, em regra, a ausência de prova implique na improcedência do feito, a jurisprudência do STJ consolidou-se no sentido de que, nas demandas previdenciárias, a ausência de prova de tempo de contribuição deve resultar na extinção do feito sem resolução de mérito, por ausência de pressuposto processual, diante do caráter social que a lide envolve. Trata-se do Resp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, julgado em regime de recursos repetitivos (tema 629) - REsp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, CORTE ESPECIAL, julgado em 16/12/2015, DJe 28/04/2016."
-                                                                    ]
+                                            p["texto_final_periodos"] = []
+                                            p["texto_final_periodos"].append(f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:")
+                                            p["texto_final_periodos"].append(f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, sendo ônus da parte autora junta-lo aos autos.")
+                                            p["texto_final_periodos"].extend(p["documento_prova_material"])
+                                            p["texto_final_periodos"].extend(p["conclusao_prova_material"])
+                                            p["texto_final_periodos"].append(f"Ausente início de prova material, inviável o acolhimento do pleito. Em que pese, em regra, a ausência de prova implique na improcedência do feito, a jurisprudência do STJ consolidou-se no sentido de que, nas demandas previdenciárias, a ausência de prova de tempo de contribuição deve resultar na extinção do feito sem resolução de mérito, por ausência de pressuposto processual, diante do caráter social que a lide envolve. Trata-se do Resp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, julgado em regime de recursos repetitivos (tema 629) - REsp 1352721/SP, Rel. Ministro NAPOLEÃO NUNES MAIA FILHO, CORTE ESPECIAL, julgado em 16/12/2015, DJe 28/04/2016.")
+                                                                    
                                    
                                         if inicio_prova_material_apresentado == 1:
                                             especificar_conclusao_prova_material = st.radio(f"A sentença informará genericamente que: 'Considero suficiente o início de prova material apresentado nos autos autos'. Deseja apresentar outros esclarecimentos além disso, ou esta redação é suficiente?", [1,2], format_func=lambda x: "Esta redação é suficiente" if x == 1 else "Desejo apresentar esclarecimentos", key=f"especificar_conclusao_prova_material_{i}")
@@ -535,29 +536,29 @@ if uploaded_file:
                                                 p["conclusao_depoimento"] = "O ônus da prova é da parte autora, nos termos da legislação processual. Embora tenha apresentado início de prova material, não foram indicadas testemunhas para comprovação do alegado, em audiência. A falta de prova implica em improcedência."
                                                 p["resultado"] = "Improcedente"
                                                 p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}."
-                                                p["texto_final_periodos"] = [
-                                                                            f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                            f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, que, por si só, não é suficiente para reconhecimento da pretensão. É indispensável a oitiva da testemunhas para confirmar a existência do tempo de trabalho.",
-                                                                            f"O ônus da prova é da parte autora, nos termos da legislação processual. Embora tenha apresentado início de prova material, não foram indicadas testemunhas para comprovação do alegado, em audiência. A falta de prova implica em improcedência.",
-                                                                            ]
+                                                p["texto_final_periodos"] = []
+                                                p["texto_final_periodos"].append(f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:")
+                                                p["texto_final_periodos"].append(f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, que, por si só, não é suficiente para reconhecimento da pretensão. É indispensável a oitiva da testemunhas para confirmar a existência do tempo de trabalho.")
+                                                p["texto_final_periodos"].append(f"O ônus da prova é da parte autora, nos termos da legislação processual. Embora tenha apresentado início de prova material, não foram indicadas testemunhas para comprovação do alegado, em audiência. A falta de prova implica em improcedência.")
+                                                                            
     
                                             if testemunhal == 1:
+                                                p["texto_final_periodos"] = []
+                                                p["texto_final_periodos"].append(f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:")
+                                                p["texto_final_periodos"].append(f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.")
+                                                p["texto_final_periodos"].extend(p['documento_prova_material'])
+                                                p["texto_final_periodos"].extend([f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material'][0]}"] + p["conclusao_prova_material"][1:] if p["conclusao_prova_material"] else ["Considero suficiente o início de prova material apresentado nos autos autos."])
+                                                p["texto_final_periodos"].extend(f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:")
+                                                p["texto_final_periodos"].extend(p['depoimento'])
+                                                p["texto_final_periodos"].extend(p['conclusao_depoimento'])
+                                                
                                                 p["depoimento"] = [p.strip() for p in st.text_area("Redija o(s) depoimento(s). Inicie com letra maiúscula, e encerre com ponto final", key=f"depoimento_{i}").split("\n") if p.strip()]
                                                 if o_que_parte_pede == 1:
                                                     sera_reconhecido = st.radio(f"Dentro do período de {p['data_inicio_maior']} até {p['data_fim_maior']}, a sentença reconhecerá o período de {p['data_inicio']} até {p['data_fim']} como tempo de serviço?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"sera_reconhecido_{i}")
                                                     p["conclusao_depoimento"] = [p.strip() for p in st.text_area(f"Redija porque chegou nesta nesta conclusão, com base nos depoimentos colhidos e demais provas. Inicie com letra maiúscula e encerre com ponto final.", key=f"conclusao_depoimento_{i}").split("\n") if p.strip()]
                                                     p["tipo_tempo"] = "comum" if sera_reconhecido == 1 else ""
                                                     p["resultado"] = "Procedente" if sera_reconhecido == 1 and periodo_maior == 2 else "Procedente em parte" if sera_reconhecido == 1 and periodo_maior == 1 else "Improcedente"
-                                                    p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}." if p.get("resultado") == "Improcedente" else f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido " + (f"e declaro o periodo de {p['data_inicio']} a {p['data_fim']} como tempo comum, determinando sua averbação." if p["tipo_tempo"] == "comum" else f"")
-                                                    p["texto_final_periodos"] = [
-                                                                                f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                                f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{p['documento_prova_material']}",
-                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
-                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{p['depoimento']}", 
-                                                                                f"{p['conclusao_depoimento']}"
-                                                                                ]
+                                                    p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}." if p.get("resultado") == "Improcedente" else f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido " + (f"e declaro o periodo de {p['data_inicio']} a {p['data_fim']} como tempo comum, determinando sua averbação." if p["tipo_tempo"] == "comum" else f"")                                                                                
     
                                                 if o_que_parte_pede == 2:
                                                     sera_reconhecido = st.radio(f"Dentro do período de {p['data_inicio_maior']} até {p['data_fim_maior']}, a sentença reconhecerá o período de {p['data_inicio']} até {['data_fim']} como tempo tempo de serviço?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", key=f"sera_reconhecido_{i}")                          
@@ -565,33 +566,17 @@ if uploaded_file:
                                                     if sera_reconhecido == 2:
                                                         p["resultado"] = "Improcedente"
                                                         p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}."
-                                                        p["texto_final_periodos"] = [
-                                                                                f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                                f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{p['documento_prova_material']}",
-                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
-                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{p['depoimento']}", 
-                                                                                f"{p['conclusao_depoimento']}",
-                                                                                f"A parte autora não comprovou o alegado, e, por isso, seu pedido de reconhecimento do período em questão deve ser improcedente"
-                                                                                ]
+                                                        p["texto_final_periodos"].append(f"A parte autora não comprovou o alegado, e, por isso, seu pedido de reconhecimento do período em questão deve ser improcedente")
+                                                                                
                                                     if sera_reconhecido == 1:
                                                         sera_reconhecido_comum_especial = st.radio(f"Dentro do período de {p['data_inicio_maior']} até {p['data_fim_maior']}, a sentença reconhecerá o período de {p['data_inicio']} ate {p['data_fim']} como tempo comum ou tempo especial?", [1, 2], format_func=lambda x: "Comum" if x == 1 else "Especial", key=f"sera_reconhecido_comum_especial_{i}")
                                                         p["conclusao_especial_ou_comum"] = [p.strip() for p in st.text_area(f"Redija porque chegou nesta conclusão, com base nas provas. Inicie com letra maiúscula e encerre com ponto final.", key=f"conclusao_comum_especial{i}").split("\n") if p.strip()]
                                                         p["tipo_tempo"] = "comum" if sera_reconhecido_comum_especial == 1 else "especial"
                                                         p["resultado"] = "Procedente" if sera_reconhecido_comum_especial == 2 and periodo_maior == 2 else "Procedente em parte"
                                                         p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido " + (f"e declaro o período entre {p['data_inicio']} até {p['data_fim']} como tempo {p['tipo_tempo']}, determinando sua averbação." if p["tipo_tempo"] == "comum" else f"e declaro o período entre {p['data_inicio']} até {p['data_fim']}, como tempo {p['tipo_tempo']}, sujeito a conversão, determinando sua averbação." if p["tipo_tempo"] == "especial" else "")
-                                                        p["texto_final_periodos"] = [
-                                                                                    f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                                    f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                    f"{p['documento_prova_material']}",
-                                                                                    f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
-                                                                                    f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
-                                                                                    f"{p['depoimento']}", 
-                                                                                    f"{p['conclusao_depoimento']}"
-                                                                                    f"Passo a analisar a alegação de que o tempo de trabalho é tempo especial.",
-                                                                                    f"{p['conclusao_especial_ou_comum']}"
-                                                                                    ]
+                                                        p["texto_final_periodos"].append(f"Passo a analisar a alegação de que o tempo de trabalho é tempo especial.")
+                                                        p["texto_final_periodos"].extend(p['conclusao_especial_ou_comum'])
+                                                                                    
     
                                                 if o_que_parte_pede == 3:
                                                     sera_reconhecido = st.radio(f"Dentro do período de {p['data_inicio_maior']} até {p['data_fim_maior']}, a sentença reconhecerá o período de {p['data_inicio']} até {p['data_fim']} como tempo rural ou não reconhecerá o tempo de trabalho deste período?", [1, 2], format_func=lambda x: "Reconhecerá o tempo rural" if x == 1 else "Não reconhecerá",key=f"sera_reconhecido_{i}")
@@ -599,30 +584,13 @@ if uploaded_file:
                                                     if sera_reconhecido == 2:
                                                         p["resultado"] = "Improcedente"
                                                         p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao tempo rural de {p['data_inicio_maior']} a {p['data_fim_maior']}."
-                                                        p["texto_final_periodos"] = [
-                                                                                f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                                f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{p['documento_prova_material']}",
-                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
-                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{p['depoimento']}", 
-                                                                                f"{p['conclusao_depoimento']}",
-                                                                                f"A parte autora não comprovou o alegado, e, por isso, seu pedido de reconhecimento do período em questão deve ser improcedente."
-                                                                                ]
+                                                        p["texto_final_periodos"].append(f"A parte autora não comprovou o alegado, e, por isso, seu pedido de reconhecimento do período em questão deve ser improcedente.")
+                                                                                
     
                                                     if sera_reconhecido == 1:                                            
                                                         p["tipo_tempo"] = "rural"
                                                         p["resultado"] = "Procedente" if periodo_maior == 2 else "Procedente em parte"
                                                         p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']}, JULGO {p['resultado'].upper()} o pedido e declaro o período entre {p["data_inicio"]} até {p["data_fim"]} como tempo rural, determinando sua averbação."
-                                                        p["texto_final_periodos"] = [
-                                                                                f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                                f"Em relação ao tempo de trabalho de {p["data_inicio_maior"]} até {p["data_fim_maior"]} - {p["vinculo"]} - em que a parte autora pede {p["o_que_parte_pede"]}, o art. 55, § 3º da Lei n. 8.213/91 exige a apresentação de início de prova material, para reconhecimento do pedido. No caso dos autos, houve início de prova material.",
-                                                                                f"{p['documento_prova_material']}",
-                                                                                f"Considero suficiente o início de prova material apresentado nos autos autos. {p['conclusao_prova_material']}",
-                                                                                f"Para comprovação do alegado, houve oitiva de testemunha(s) em Juízo:",
-                                                                                f"{p['depoimento']}", 
-                                                                                f"{p['conclusao_depoimento']}"
-                                                                                    ]                         
     
     
                                 if o_que_parte_pede == 4:
@@ -633,11 +601,11 @@ if uploaded_file:
                                     p["tipo_tempo"] = "comum" if sera_reconhecido == 1 else "especial"
                                     p["resultado"] = "Procedente" if sera_reconhecido == 2 and periodo_maior == 2 else "Procedente em parte" if sera_reconhecido == 2 and periodo_maior == 1 else "Improcedente"
                                     p["dispositivo"] = f"Com resolução de mérito, nos termos do art. 487, I do CPC, JULGO IMPROCEDENTE o pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}." if p.get("resultado") == "Improcedente" else f"Com resolução de mérito, nos termos do art. 487, I do CPC, em relação ao pedido de {p['o_que_parte_pede']} referente ao período de {p['data_inicio_maior']} a {p['data_fim_maior']} - {p['vinculo']}, JULGO {p['resultado'].upper()} o pedido, e declaro o período entre {p["data_inicio"]} até {p["data_fim"]} como tempo especial, determinando sua averbação."
-                                    p["texto_final_periodos"] = [
-                                                                f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:",
-                                                                f"A parte autora alega que o período laborado entre {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}, é tempo especial.",
-                                                                f"{p['conclusao_especial_ou_comum']}"
-                                                                ]
+                                    p["texto_final_periodos"] = []
+                                    p["texto_final_periodos"].append(f"DO PERÍODO ENTRE {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}:")
+                                    p["texto_final_periodos"].append(f"A parte autora alega que o período laborado entre {p["data_inicio_maior"]} ATÉ {p["data_fim_maior"]} - {p["vinculo"]}, é tempo especial.")
+                                    p["texto_final_periodos"].extend(p['conclusao_especial_ou_comum'])
+                                                                
     
                             if p["origem_do_dado"] == "controvertido_deficiencia":
                                 periodo_maior = st.radio("Este período analisado é todo o período controvertido pela parte autora, ou é apenas parte de um período maior controvertido pela parte autora?",[1,2], format_func=lambda x: ("O período analisado é parte de um período controvertido maior" if x == 1 else "O período analisado é toda o período controvertido pela parte autora"), key=f"periodo_maior_{i}")
