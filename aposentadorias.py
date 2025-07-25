@@ -931,6 +931,7 @@ if uploaded_file:
                                 texto_DER_demonstrativo_tempo_total = f"{rotulo_DER_corrigido} foi apurado o {tempo_DER_demonstrativo_corrigido}, com carência de {carencia_DER_demonstrativo_corrigida} e idade da parte autora de {idade_DER_demonstrativo_corrigida}."
                                 if texto_DER_demonstrativo_tempo_total not in st.session_state["analise_paragrafos"]["demonstrativo_tempo_total"]:
                                     st.session_state["analise_paragrafos"]["demonstrativo_tempo_total"].append(texto_DER_demonstrativo_tempo_total)
+                                st.markdown(texto_DER_demonstrativo_tempo_total)
                     
                     # 3. BENEFÍCIOS CUMPRIDOS
                     cumpridos = resposta.get("beneficios", {}).get("cumpridos", [])
