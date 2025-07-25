@@ -917,6 +917,20 @@ if uploaded_file:
                                             st.session_state["analise_paragrafos"]["demonstrativo_tempo_total_PCD"].append(texto_tempo_PCD_convertido)
                                         st.markdown(texto_tempo_PCD_convertido)
 
+                    if "totais" in resposta:
+                        st.markdown("📊 Demonstrativo de Tempo na DER")
+                        for item in resposta["totais"]:
+                            rotulo_DER_corrigido = corrigir_data_em_string(item.get("rotulo"))
+                            if item.get("simples") == item.get("convertido"):
+                                tempo_DER_demonstrativo_corrigido = f"tempo de contribuição apurado de {formatar_dias_em_anos_meses_dias(item.get("simples"))}, não havendo conversões no período"
+                            else:
+                                tempo_DER_demonstrativo_corrigido = f"tempo de contribuição total de {formatar_dias_em_anos_meses_dias(item.get("convertido"))}, já computadas as conversões de tempo reconhecidas no período" 
+                            carencia_DER_demonstrativo_corrigida = f"{item.get("carencia")} meses"
+                            idade_DER_demonstrativo_corrigida = f"{item.get("idade")} anos de idade"
+                            texto_DER_demonstrativo_tempo_total = f"{rotulo_DER_corrigido} foi apurado o {tempo_DER_demonstrativo_corrigido}, com carência de {carencia_DER_demonstrativo_corrigida} e idade da parte autora de {idade_DER_demonstrativo_corrigida}."
+                            if texto_DER_demonstrativo_tempo_total not in st.session_state["analise_paragrafos"]["demonstrativo_tempo_total"]:
+                                st.session_state["analise_paragrafos"]["demonstrativo_tempo_total"].append(texto_DER_demonstrativo_tempo_total)
+                    
                     # 3. BENEFÍCIOS CUMPRIDOS
                     cumpridos = resposta.get("beneficios", {}).get("cumpridos", [])
                     if cumpridos:
