@@ -998,6 +998,8 @@ if uploaded_file:
                 if deseja_imagem == 1:
                     # Upload da imagem
                     imagem = st.file_uploader("Envie uma imagem", type=["png", "jpg", "jpeg"])
+                if deseja_imagem == 2:
+                    imagem = False
                 
                 desfecho_dispositivo = [
                                 f"Sem condenação em honorários nesta instância.",
