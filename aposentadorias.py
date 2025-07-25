@@ -505,7 +505,7 @@ if uploaded_file:
                                                                          ])
                                         if sumula_75_TNU == 2:
                                             motivo_CTPS = [p.strip() for p in st.text_area(f"Redija porque a CTPS não serve como prova para fins da aplicação da súmula 75 da TNU. Inicie com letra maiúscula e encerre com ponto final.", key=f"motivo_CTPS_{i}").split("\n") if p.strip()]
-                                            aplicacao_sumula_75_negativa_CTPS.extend(motivo)
+                                            aplicacao_sumula_75_negativa_CTPS.extend(motivo_CTPS)
 
                                     if aplicacao_sumula_75_reconhecimento_CTPS:
                                         p["texto_final_periodos"] = []
