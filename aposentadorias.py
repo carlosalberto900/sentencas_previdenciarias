@@ -6,6 +6,8 @@ from datetime import datetime
 from docx import Document
 from docx.shared import Cm
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from PIL import Image
+import io
 import funcoes_texto as ft
 import agentes_nocivos as agnocivo
 
@@ -991,6 +993,12 @@ if uploaded_file:
                 #     st.write(paragrafos_sobre_dados_basicos) #dicionario
 
                 # MONTAR REDACAO DA SENTENÇA
+                
+                deseja_imagem = st.radio("Deseja inserir uma imagem com o quadro da simulação de tempo de contribuição?", [1,2], format_func=lambda x: "Sim" if x == 1 else "Não")
+                if deseja_imagem == 1:
+                    # Upload da imagem
+                    imagem = st.file_uploader("Envie uma imagem", type=["png", "jpg", "jpeg"])
+                
                 desfecho_dispositivo = [
                                 f"Sem condenação em honorários nesta instância.",
                                 f"Defiro os benefícios da gratuidade.",
@@ -1002,6 +1010,7 @@ if uploaded_file:
                                 ]
 
                 texto_fundamentacao_sentenca = []
+                texto_fundamentacao_sentenca_continuacao = []
 
                 # redação da análise de cada período de trabalho
                 for item in periodos_para_sentenca:
@@ -1014,22 +1023,22 @@ if uploaded_file:
                 #     texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO EM CADA VÍNCULO:")
                 #     texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_cada_vinculo"])
                 if paragrafos_sobre_tempo.get("demonstrativo_tempo_total_magisterio"):
-                    texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO NO MAGISTÉRIO:")
-                    texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total_magisterio"])
+                    texto_fundamentacao_sentenca_continuacao.append("TEMPO DE TRABALHO NO MAGISTÉRIO:")
+                    texto_fundamentacao_sentenca_continuacao.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total_magisterio"])
                 if paragrafos_sobre_tempo.get("demonstrativo_tempo_total_PCD"):
-                    texto_fundamentacao_sentenca.append("TEMPO DE TRABALHO COM DEFICIÊNCIA:")
-                    texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total_PCD"]) 
+                    texto_fundamentacao_sentenca_continuacao.append("TEMPO DE TRABALHO COM DEFICIÊNCIA:")
+                    texto_fundamentacao_sentenca_continuacao.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total_PCD"]) 
                 if paragrafos_sobre_tempo.get("demonstrativo_tempo_total"):
-                    texto_fundamentacao_sentenca.append("SÍNTESE DO TEMPO TOTAL DE CONTRIBUIÇÃO:")
-                    texto_fundamentacao_sentenca.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total"])                   
+                    texto_fundamentacao_sentenca_continuacao.append("SÍNTESE DO TEMPO TOTAL DE CONTRIBUIÇÃO:")
+                    texto_fundamentacao_sentenca_continuacao.extend(paragrafos_sobre_tempo["demonstrativo_tempo_total"])                   
                 beneficios_cumpridos = paragrafos_sobre_tempo.get("analise_API_beneficios_cumpridos", [])
                 beneficios_nao = paragrafos_sobre_tempo.get("analise_API_beneficios_nao_cumpridos", [])
                 if beneficios_nao:
-                    texto_fundamentacao_sentenca.append("APOSENTADORIAS COM REQUISITOS QUE NÃO FORAM CUMPRIDOS:")
-                    texto_fundamentacao_sentenca.extend(beneficios_nao)
+                    texto_fundamentacao_sentenca_continuacao.append("APOSENTADORIAS COM REQUISITOS QUE NÃO FORAM CUMPRIDOS:")
+                    texto_fundamentacao_sentenca_continuacao.extend(beneficios_nao)
                 if beneficios_cumpridos:
-                    texto_fundamentacao_sentenca.append("APOSENTADORIAS COM REQUISITOS CUMPRIDOS:")
-                    texto_fundamentacao_sentenca.extend(beneficios_cumpridos)
+                    texto_fundamentacao_sentenca_continuacao.append("APOSENTADORIAS COM REQUISITOS CUMPRIDOS:")
+                    texto_fundamentacao_sentenca_continuacao.extend(beneficios_cumpridos)
 
                 # 2. Inicia lista que armazenará dispositivo
                 dispositivo = []
@@ -1095,14 +1104,19 @@ if uploaded_file:
             #     st.markdown("\n\n".join(texto_fundamentacao_sentenca))
             #     st.markdown("\n\n".join(dispositivo))
 
-
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base(doc, fundamento_questao)
                 ft.alinhamento_parag_dispositivo(doc, texto_fundamentacao_sentenca)
+                if imagem:
+                    image_bytes = imagem.read()
+                    image_stream = io.BytesIO(image_bytes)
+                    doc.add_picture(image_stream, width=Cm(15))  
+                if texto_fundamentacao_sentenca_continuacao:
+                    ft.alinhamento_parag_dispositivo(doc, texto_fundamentacao_sentenca_continuacao)
                 ft.alinhamento_parag_dispositivo(doc, dispositivo)
-                ft.salvar_docx_temporario(doc, processo_formatado)              
+                ft.salvar_docx_temporario(doc, processo_formatado)                         
             
         else:
             st.error(f"Erro {response.status_code}: {response.text}")
