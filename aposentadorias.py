@@ -436,7 +436,7 @@ if uploaded_file:
                             novo_periodo = {
                                 "data_inicio": data_inicio_inserido,
                                 "data_fim": data_fim_inserido,
-                                "vinculo": vinculo_inserido,
+                                "vinculo": "",
                                 "data_inicio_maior": "",
                                 "data_fim_maior": "",
                                 "origem_do_dado": origem_dado,
