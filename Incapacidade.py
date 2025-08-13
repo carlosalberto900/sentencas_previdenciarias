@@ -232,7 +232,8 @@ else:
             if tipo == 2: 
                 datetime.strptime(dcb, "%d/%m/%Y")
         except ValueError:
-            st.error("Formato de data inválido! - Confira o formato de DII, DIB e DCB (se houver). Devem estar em DD/MM/AAAA. Corrija e tente novamente.")
+            st.error("Formato de data inválido! - Confira o formato de DII, DIB e DCB (se houver). Devem estar em DD/MM/AAAA. Não são aceitos dados em branco. Corrija e tente novamente.")
+            st.stop()
         doc = Document()
         doc.add_paragraph(f"Processo: {processo_formatado}")
         texto_base(doc, fundamento_questao)    
