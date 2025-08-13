@@ -229,7 +229,8 @@ else:
             # Validação de datas
             datetime.strptime(dii, "%d/%m/%Y")
             datetime.strptime(dib, "%d/%m/%Y")
-            if dcb: datetime.strptime(dcb, "%d/%m/%Y")
+            if tipo == 2: 
+                datetime.strptime(dcb, "%d/%m/%Y")
         except ValueError:
             st.error("Formato de data inválido!")
         doc = Document()
@@ -291,11 +292,12 @@ else:
             (f"NB: a ser definida pelo INSS"),
             (f"DII: {dii}"),
             (f"DIB: {dib}"),
-            (f"RMI e RMA: a serem calculadas pelo INSS"),
-            (f"DCB: {dcb}"),
-            (f"DIP: {DIP}")]
+            (f"RMI e RMA: a serem calculadas pelo INSS")]
+
             if dcb_convertida <= DIP_convertida:
                 fundamentacao_tipo2.extend([
+                    (f"DCB: {dcb} - devendo ser garantido o recebimento pelo prazo mínimo de 30 dias, desde a data de cumprimento efetivo da implantação, para viabilizar o pedido administrativo de prorrogação, na forma do Tema 246 da TNU."),
+                    (f"DIP: {DIP}"),
                     (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DCB em {dcb}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
                     (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
                     (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
@@ -312,6 +314,8 @@ else:
                     ])
             else:
                 fundamentacao_tipo2.extend([
+                    (f"DCB: {dcb}"),
+                    (f"DIP: {DIP}"),
                     (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
                     (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
                     (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
