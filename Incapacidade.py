@@ -295,7 +295,7 @@ else:
             (f"DCB: {dcb}"),
             (f"DIP: {DIP}")]
             if dcb_convertida <= DIP_convertida:
-                fundamentacao_tipo2.append([
+                fundamentacao_tipo2.extend([
                     (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DCB em {dcb}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
                     (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
                     (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
@@ -311,7 +311,7 @@ else:
                     (f"Int.")
                     ])
             else:
-                fundamentacao_tipo2.append([
+                fundamentacao_tipo2.extend([
                     (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
                     (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
                     (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
