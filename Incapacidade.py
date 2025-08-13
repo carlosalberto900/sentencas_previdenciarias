@@ -205,6 +205,8 @@ else:
         motivo_DIB_redigido = "DIB fixada na DER."
 
     dcb = st.text_input("DCB (dd/mm/aaaa):") if tipo == 2 else None
+    if dcb:
+        dcb_convertida = datetime.strptime(dcb, "%d/%m/%Y").date()
 
     motivo_da_DCB = st.radio("Explique a DCB fixada", [1, 2],
                     format_func = lambda x: ["Para fixação da DCB foi adotada a estimativa de prazo de recuperação de capacidade prevista na perícia, com termo inicial na data do exame, na forma do Tema 246 da TNU. O INSS deverá garantir o mínimo de 30 dias de manutenção do benefício, desde a implantação, para viabilizar o pedido administrativo de prorrogação. Compete à parte acompanhar a implantação e prazo para eventual prorrogação.", "Para fixação da DCB foi adotado o prazo de 120 dias a contar da efetiva implantação, na forma do Tema 246 da TNU. O INSS deverá garantir o mínimo de 30 dias de manutenção do benefício, desde a implantação, para viabilizar o pedido administrativo de prorrogação. Compete à parte acompanhar a implantação e prazo para eventual prorrogação."] [x-1]) if tipo == 2 else None
@@ -222,6 +224,7 @@ else:
     if st.button("Gerar Procedência"):
         data_atual = datetime.now()
         DIP = data_atual.strftime("01/%m/%Y")
+        DIP_convertida = datetime.strptime(DIP, "%d/%m/%Y").date()
         try:
             # Validação de datas
             datetime.strptime(dii, "%d/%m/%Y")
@@ -290,21 +293,39 @@ else:
             (f"DIB: {dib}"),
             (f"RMI e RMA: a serem calculadas pelo INSS"),
             (f"DCB: {dcb}"),
-            (f"DIP: {DIP}"),
-            (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
-            (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
-            (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
-            (f"Considerando que o momento da prolação de sentença é oportuno para distribuir o ônus do tempo do processo, com vistas a salvaguardar a eficácia do princípio constitucional da razoável duração do processo e ao mesmo tempo privilegiar o direito provável em detrimento do improvável, demonstrada a verossimilhança das alegações da parte autora e diante do nítido caráter alimentar da verba pleiteada, nos termos do art. 294 e 300, do CPC ANTECIPA A TUTELA JURISDICIONAL para determinar ao INSS que providencie a implantação do {beneficio_concedido} com data de início de pagamento em {DIP} (DIP)."),
-            (f"O INSS deverá providenciar a implantação do benefício previdenciário ora concedido no prazo legal, sendo a contagem em dias úteis, sendo que constitui ônus das partes informar ao Juízo sobre a efetiva implantação do benefício ou eventual descumprimento do prazo pelo INSS/APSADJ."),
-            (f"O INSS deverá garantir o mínimo de 30 dias de manutenção do benefício, desde a implantação, para viabilizar o pedido administrativo de prorrogação, mesmo nas hipóteses em que a DCB fixada na sentença seja anterior à data de sua prolatação. Compete à parte acompanhar a implantação e prazo para eventual prorrogação, não havendo intimação por este Juízo."),
-            (f"Sem condenação em honorários nesta instância."),
-            (f"Defiro os benefícios da gratuidade."),
-            (f"Em caso de interposição de embargos de declaração, intime-se a parte contrária para contrarrazões no prazo legal, e tornem conclusos para julgamento."),
-            (f"Interposto recurso, intime-se a parte contrária para contrarrazões no prazo legal. Após, remetam-se os autos às Turmas Recursais."),
-            (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
-            (f"Proceda a Secretaria como necessário."),
-            (f"Int."),
-            ]
+            (f"DIP: {DIP}")]
+            if dcb_convertida <= DIP_convertida:
+                fundamentacao_tipo2.append([
+                    (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DCB em {dcb}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
+                    (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
+                    (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
+                    (f"Considerando que o momento da prolação de sentença é oportuno para distribuir o ônus do tempo do processo, com vistas a salvaguardar a eficácia do princípio constitucional da razoável duração do processo e ao mesmo tempo privilegiar o direito provável em detrimento do improvável, demonstrada a verossimilhança das alegações da parte autora e diante do nítido caráter alimentar da verba pleiteada, nos termos do art. 294 e 300, do CPC ANTECIPA A TUTELA JURISDICIONAL para determinar ao INSS que providencie a implantação do {beneficio_concedido} com data de início de pagamento em {DIP} (DIP)."),
+                    (f"O INSS deverá providenciar a implantação do benefício previdenciário ora concedido no prazo legal, sendo a contagem em dias úteis, sendo que constitui ônus das partes informar ao Juízo sobre a efetiva implantação do benefício ou eventual descumprimento do prazo pelo INSS/APSADJ."),
+                    (f"Anoto que o pagamento dos atrasados será calculado nos parâmetros fixados nesta sentença, entre a DIB e a DCB fixadas, sendo que a ordem de implantação do benefício na DIP fixada visa garantir o prazo mínimo de 30 dias, desde a data de cumprimento efetivo da implantação, para viabilizar o pedido administrativo de prorrogação, na forma do Tema 246 da TNU. Compete à parte acompanhar a implantação e prazo para eventual prorrogação, não havendo intimação por este Juízo."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Em caso de interposição de embargos de declaração, intime-se a parte contrária para contrarrazões no prazo legal, e tornem conclusos para julgamento."),
+                    (f"Interposto recurso, intime-se a parte contrária para contrarrazões no prazo legal. Após, remetam-se os autos às Turmas Recursais."),
+                    (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
+                    (f"Proceda a Secretaria como necessário."),
+                    (f"Int.")
+                    ])
+            else:
+                fundamentacao_tipo2.append([
+                    (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
+                    (f"Fica autorizado o desconto de eventuais valores recebidos a título de benefícios inacumuláveis."),
+                    (f"Condeno o INSS ao ressarcimento dos honorários periciais antecipados pela Justiça Federal (art. 82, § 2º, do CPC)."),
+                    (f"Considerando que o momento da prolação de sentença é oportuno para distribuir o ônus do tempo do processo, com vistas a salvaguardar a eficácia do princípio constitucional da razoável duração do processo e ao mesmo tempo privilegiar o direito provável em detrimento do improvável, demonstrada a verossimilhança das alegações da parte autora e diante do nítido caráter alimentar da verba pleiteada, nos termos do art. 294 e 300, do CPC ANTECIPA A TUTELA JURISDICIONAL para determinar ao INSS que providencie a implantação do {beneficio_concedido} com data de início de pagamento em {DIP} (DIP)."),
+                    (f"O INSS deverá providenciar a implantação do benefício previdenciário ora concedido no prazo legal, sendo a contagem em dias úteis, sendo que constitui ônus das partes informar ao Juízo sobre a efetiva implantação do benefício ou eventual descumprimento do prazo pelo INSS/APSADJ."),
+                    (f"O INSS deverá garantir o mínimo de 30 dias de manutenção do benefício, desde a implantação, para viabilizar o pedido administrativo de prorrogação. Compete à parte acompanhar a implantação e prazo para eventual prorrogação, não havendo intimação por este Juízo."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Em caso de interposição de embargos de declaração, intime-se a parte contrária para contrarrazões no prazo legal, e tornem conclusos para julgamento."),
+                    (f"Interposto recurso, intime-se a parte contrária para contrarrazões no prazo legal. Após, remetam-se os autos às Turmas Recursais."),
+                    (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
+                    (f"Proceda a Secretaria como necessário."),
+                    (f"Int."),
+                    ])
             ft.alinhamento_parag_dispositivo(doc, fundamentacao_tipo2)
                 
         if tipo == 3:
