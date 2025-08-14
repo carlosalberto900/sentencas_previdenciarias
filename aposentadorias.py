@@ -474,7 +474,7 @@ if uploaded_file:
                     for i, p in enumerate(periodos_para_sentenca):
                         with st.expander(f"De {p['data_inicio']} a {p['data_fim']}"):
                             if p["origem_do_dado"] == "controvertido_sem_deficiencia":
-                                p["vinculo"] = st.text_input("Qual a descrição do vínculo (nome do empregador ou contratante / contribuinte individual / rural / etc.)", key=f"vinculo_{i}")
+                                p["vinculo"] = st.text_input("Qual a descrição do vínculo (nome do empregador ou contratante / contribuinte individual / rural / etc.)", value=periodos_para_sentenca[i].get("vinculo", ""), key=f"vinculo_{i}")
                                 periodo_maior = st.radio("Este período analisado é todo o período controvertido pela parte autora, ou é apenas parte de um período maior controvertido pela parte autora?",[1,2], format_func=lambda x: ("O período analisado é parte de um período controvertido maior" if x == 1 else "O período analisado é toda o período controvertido pela parte autora"), key=f"periodo_maior_{i}", index=1)
                                 if periodo_maior == 1:
                                     p["data_inicio_maior"] = st.text_input("Qual a data inicial do período maior controvertido? Digite em formato dd/mm/aaaa.", key=f"data_inicio_maior_{i}")
