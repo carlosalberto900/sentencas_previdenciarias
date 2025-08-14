@@ -920,7 +920,7 @@ if uploaded_file:
                                         if texto_tempo_PCD_convertido not in st.session_state["analise_paragrafos"]["demonstrativo_tempo_total_PCD"]:
                                             st.session_state["analise_paragrafos"]["demonstrativo_tempo_total_PCD"].append(texto_tempo_PCD_convertido)
                                         st.markdown(texto_tempo_PCD_convertido)
-
+                    # 2.1 TEMPO TOTAL DA DER
                     if "totais" in resposta:
                         st.markdown("📊 Demonstrativo de Tempo na DER")
                         item = resposta["totais"]  
