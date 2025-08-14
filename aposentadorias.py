@@ -890,8 +890,11 @@ if uploaded_file:
                         st.markdown("📊 Demonstrativo de Tempo")
                         for item in resposta["demonstrativo"]:
                             if isinstance(item, dict):
-                                if item.get("rotulo") in ["Até 11/10/2023", "Até 12/16/1998 (EC 20)", "Até 11/28/1999 (Lei 9.876)", "Até 11/13/2019 (Lei 9.876)"]:
-                                    rotulo_corrigido = corrigir_data_em_string(item.get("rotulo"))
+                                rotulos_fixos = ["Até 16/12/1998 (EC 20)", "Até 28/11/1999 (Lei 9.876)", "Até 13/11/2019 (EC 103)"]
+]
+                                if (item.get("rotulo") in rotulos_fixos or re.fullmatch(r"Até \d{2}/\d{2}/\d{4}", item.get("rotulo", ""))):
+                                    #rotulo_corrigido = corrigir_data_em_string(item.get("rotulo"))
+                                    rotulo_corrigido = item.get("rotulo")
                                     if item.get("simples") == item.get("convertido"):
                                         tempo_demonstrativo_corrigido = f"tempo de contribuição apurado de {formatar_dias_em_anos_meses_dias(item.get("simples"))}, não havendo conversões no período"
                                     else:
