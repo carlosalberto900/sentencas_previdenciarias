@@ -118,7 +118,7 @@ if resultado == 2:
                     if linha.strip():
                         fundamento_improcedencia2.append(linha)
             fundamento_improcedencia2.extend([
-                (f"O caso não comporta que se produza outro laudo pericial, ou que se exija outros esclarecimentos do perito. O perito é claro em seu laudo."),
+                (f"O caso não comporta que se produza outro laudo pericial, ou que se exijam outros esclarecimentos do perito. O perito é claro em seu laudo."),
                 (f"Não cumprido um dos requisitos legais, o pedido é improcedente."),
                 (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido."),
                 (f"Sem condenação em honorários nesta instância."),
@@ -148,7 +148,7 @@ if resultado == 2:
                     if linha.split():
                         fundamento_improcedencia3.append(linha)                
             fundamento_improcedencia3.extend([
-                (f"O caso não comporta que se produza outro laudo pericial, ou que se exija outros esclarecimentos do perito. O perito é claro em seu laudo."),
+                (f"O caso não comporta que se produza outro laudo pericial, ou que se exijam outros esclarecimentos do perito. O perito é claro em seu laudo."),
                 (f"Não cumprido um dos requisitos legais, o pedido é improcedente."),
                 (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido."),
                 (f"Sem condenação em honorários nesta instância."),
