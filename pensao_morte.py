@@ -540,7 +540,6 @@ if resultado == 2:
                 ft.salvar_docx_temporario(doc, processo_formatado)   
         #A PROVA TESTEMUNHAL NÃO COMPROVA DEPENDÊNCIA ECONÔMICA
         if hipotese == 5:
-            dependente_economico()
             testemunhas = st.text_area("Redija o(s) depoimento(s) da prova testemunhal. O que for redigido será inserida como parágrafo na sentença (iniciar com letra maiúscula e colocar ponto final): ")
             if st.button("Gerar Sentença"):
                 doc = Document()
