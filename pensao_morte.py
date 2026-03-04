@@ -665,7 +665,7 @@ if resultado == 1:
                     pensao_prazo = f"até {prazo_alimentos}"
                 if qual_prazo_pensao == 2:
                     if tempo != "de forma vitalícia":        
-                        dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                        dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao1")
                         if dependente_incapaz == 1:
                             pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
                             pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
@@ -676,7 +676,7 @@ if resultado == 1:
             if alimentos == 2:
                 tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
                 if not tempo == "de forma vitalícia":        
-                    dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                    dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao2")
                     if dependente_incapaz == 1:
                         pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
                         pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
@@ -694,7 +694,7 @@ if resultado == 1:
             conclusao = st.text_area("Os depoimentos comprovam a dependência econômica, mas é preciso especificar o que levou a esta conclusão. O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
             tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
             if not tempo == "de forma vitalícia":        
-                dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+                dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao3")
                 if dependente_incapaz == 1:
                     pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
                     pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
@@ -716,7 +716,7 @@ if resultado == 1:
     if dependente_opcoes in [1, 2]:
         tempo_casamento_uniao, carencia_instituidor, tempo, idade_autor = prazo_pensao_conjuge_companheira(data_do_obito_convertida)
         if not tempo == "de forma vitalícia":        
-            dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao")
+            dependente_incapaz = st.radio("O dependente é inválido ou deficiente?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não", index=1, key="dependente_incapaz_pensao4")
             if dependente_incapaz == 1:
                 pericia = st.text_area("O que a perícia médica constatou? O que for redigido será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final): ")
                 pensao_prazo = (f"{tempo}"+", no mínimo, e enquanto durar a invalidez/deficiência da parte autora")
