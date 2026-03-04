@@ -324,7 +324,7 @@ if resultado == 2:
                         if linha.split():
                             fundamento_improcedencia.append(linha)
                 else:
-                    fundamento_improcedencia.append({documentos_trazidos})
+                    fundamento_improcedencia.append(documentos_trazidos)
                 ft.alinhamento_parag_dispositivo(doc, fundamento_improcedencia)
                 tema_629(doc)
                 ft.salvar_docx_temporario(doc, processo_formatado)                   
@@ -441,7 +441,7 @@ if resultado == 2:
                         if linha.split():
                             fundamento_improcedencia.append(linha)
                 else:
-                    fundamento_improcedencia.append({documentos_trazidos})
+                    fundamento_improcedencia.append(documentos_trazidos)
                 ft.alinhamento_parag_dispositivo(doc, fundamento_improcedencia)
                 tema_629(doc)
                 ft.salvar_docx_temporario(doc, processo_formatado)  
@@ -534,7 +534,7 @@ if resultado == 2:
                         if linha.split():
                             fundamento_improcedencia.append(linha)
                 else:
-                    fundamento_improcedencia.append({documentos_trazidos})
+                    fundamento_improcedencia.append(documentos_trazidos)
                 ft.alinhamento_parag_dispositivo(doc, fundamento_improcedencia)
                 tema_629(doc)
                 ft.salvar_docx_temporario(doc, processo_formatado)   
