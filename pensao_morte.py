@@ -385,7 +385,7 @@ if resultado == 2:
                 for linha in sem_direito_adquirido.split("\n"):
                     if linha.split():
                             fundamento_improcedencia.append(linha)
-                fundamento_improcedencia.extend(f"Mostra-se ausente, portanto, a qualidade de segurado do falecido ao tempo do óbito.")
+                fundamento_improcedencia.append(f"Mostra-se ausente, portanto, a qualidade de segurado do falecido ao tempo do óbito.")
                 ft.alinhamento_parag_dispositivo(doc, fundamento_improcedencia)
                 improcedencia(doc)
                 ft.salvar_docx_temporario(doc, processo_formatado)             
